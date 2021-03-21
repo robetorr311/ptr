@@ -1,0 +1,73 @@
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb">
+                    <a href="/"><i class="fa fa-chevron-left"></i></a>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="who">
+                    <div class="reviewer">
+                        <div class="avatar">
+                            <img src="/img/avatar.png" alt="avatar">
+                        </div>
+                        <div class="reviewing-details">
+                            <div class="name">{{ user && user.name ? user.name : 'User unkown' }}</div>
+                            <div class="role">Owner</div>
+                        </div>
+                    </div>
+                    <div class="reviewing">
+                        <span>Reviewing</span>
+                    </div>
+                    <div class="reviewee">
+                        <div class="avatar">
+                            <img src="/img/avatar.png" alt="avatar">
+                        </div>
+                        <div class="reviewing-details">
+                            <div class="name">{{ bid && bid.user ? bid.user.name : 'User unknown' }}</div>
+                            <div class="role">Pet Driver</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="review-box">
+                    <h3>Let us know wha tyou think about Latisha Pennington!</h3>
+                    <div class="rating-line">
+                        <label>Drivers Punctuality</label>
+                        <div class="stars">
+                            <star-rating v-model="form.driver" :increment="1.0" :star-size="20" :show-rating="false" inactive-color="#fff"></star-rating>
+                        </div>
+                    </div>
+                    <div class="rating-line">
+                        <label>Vehicle Condition</label>
+                        <div class="stars">
+                            <star-rating v-model="form.vehicle" :increment="1.0" :star-size="20" :show-rating="false" inactive-color="#fff"></star-rating>
+                        </div>
+                    </div>
+                    <div class="rating-line">
+                        <label>Communication Skills</label>
+                        <div class="stars">
+                            <star-rating v-model="form.communication" :increment="1.0" :star-size="20" :show-rating="false" inactive-color="#fff"></star-rating>
+                        </div>
+                    </div>
+                    <div class="rating-line">
+                        <label>Overall</label>
+                        <div class="stars">
+                            <star-rating v-model="form.overall" :increment="1.0" :star-size="20" :show-rating="false" inactive-color="#fff"></star-rating>
+                        </div>
+                    </div>
+                    <hr>
+                    <form>
+                        <div class="form-group">
+                            <textarea v-model="form.comment" class="form-control" id="additionalComments" rows="3" placeholder="Additional Comments Here..."></textarea>
+                            <span class="info">When writing your review please be respectfull and don't use foul language.</span>
+                        </div>
+                    </form>
+                    <a href="javascript:void(0)" @click="submitReview" class="btn btn--primary btn--primary--fill btn--full">Finish Transport</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

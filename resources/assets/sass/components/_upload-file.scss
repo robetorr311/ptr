@@ -1,0 +1,109 @@
+.upload-container{
+  @include boxShadow();
+  padding: 10px 15px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .upload-btn-wrapper {
+    flex-grow: 1;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px dashed gray;
+      color: gray;
+      background-color: white;
+      padding: 8px 20px;
+      border-radius: 50%;
+      height: 80px;
+      width: 80px;
+      font-size: 20px;
+      font-weight: bold;
+
+      img{
+        height: 35px;
+        width: auto;
+        transition: transform ease .7s;
+      }
+    }
+    input[type=file] {
+      font-size: 100px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+
+    }
+
+    &:hover{
+      img{
+        transform: scale(1.1);
+        transition: transform ease .7s;
+      }
+    }
+  }
+  .upload-title{
+    flex-grow: 7;
+    span{
+      &.upload-heading{
+        font-size: 22px;
+      }
+      display: block;
+    }
+  }
+}
+.preview-file-wrapper{
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  @include boxShadow();
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin: 10px 0;
+  overflow: hidden;
+  .image-wrapper{
+
+
+    /* make a square container */
+    width: 80px;
+    height: 80px;
+    /* fill the container, preserving aspect ratio, and cropping to fit */
+    background-size: cover;
+    /* center the image vertically and horizontally */
+    background-position: top center;
+    /* round the edges to a circle with border radius 1/2 container size */
+    border-radius: 50%;
+  }
+  .content-wrapper{
+    flex-grow: 2;
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+  }
+  .delete-wrapper{
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background-color: $green-primary-dark;
+    border-radius: 50%;
+    -webkit-transform: scale(1.9);
+    -moz-transform: scale(1.9);
+    -ms-transform: scale(1.9);
+    -o-transform: scale(1.9);
+    transform: scale(1.9);
+    a{
+      -webkit-transform: scale(.6);
+      -moz-transform: scale(.6);
+      -ms-transform: scale(.6);
+      -o-transform: scale(.6);
+      transform: scale(.6);
+      span{
+        color: $color-white;
+      }
+    }
+  }
+}

@@ -1,0 +1,72 @@
+.map-full{
+    position: relative;
+    .location-search{
+        position: relative;
+        z-index: 200;
+        height: 100px;
+        padding-top: 30px;
+        .map-marker{
+            .input-group-addon{
+                background: white;
+                border: 1px solid white;
+            }
+            input{
+                border: 1px solid white;
+            } 
+            .get-location{
+                border-bottom-left-radius: 0;
+                border-top-left-radius: 0;
+            }
+        }
+        &-bg{
+            position: absolute;
+            top:0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: $color-secondary;
+            z-index: 100;
+        }
+        .slider{
+            label{
+                color: white;
+                &.title{
+                    color: white;
+                    display: block;
+                    text-align: center;
+                    width: 100%;
+                    margin-top: -22px;
+                }
+            }
+        }
+    }
+
+    #map{
+        height: 650px;
+
+    }
+}
+
+@media screen and (max-width: $max-tablet){
+    .map-full{
+        .location-search{
+            height: 200px;
+            &-bg{
+                height: 200px;
+            }
+            .slider{
+                label{
+                    color: white;
+                    &.title{
+                        margin-top: 20px;
+                    }
+                }
+            }
+        }
+        #map{
+            height: 400px;
+            margin-top: 0px;
+        }
+    }
+      
+}

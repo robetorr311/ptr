@@ -1,0 +1,98 @@
+//
+//	MIXINS & FUNCTIONS
+//	A few simple Sass helpers.
+//
+
+@mixin font-face($font-family, $file-path, $weight: normal, $style: normal) {
+	@font-face {
+		font-family: $font-family;
+		font-weight: $weight;
+		font-style: $style;
+
+		src: url('#{$file-path}.eot');
+		src: url('#{$file-path}.eot?#iefix') format('embedded-opentype'),
+		     url('#{$file-path}.woff') format('woff'),
+		     url('#{$file-path}.ttf') format('truetype'),
+		     url('#{$file-path}.svg##{$font-family}') format('svg');
+	}
+}
+
+@mixin clearfix(){
+	&:after{
+		content: "";
+		display: block;
+		clear: both;
+	}
+}
+
+@mixin colorLink($linkColor, $hoverColor){
+	color: $linkColor;
+	text-decoration: none;
+	&:hover{
+		color: $hoverColor;
+		text-decoration: none;
+	}
+	&:visited{
+		color: $linkColor;
+		text-decoration: none;
+	}
+	&:focus{
+		color: $linkColor;
+		text-decoration: none;
+	}
+}
+
+@mixin fullBackground(){
+	position: absolute;
+	left: -50%;
+	right: -50%;
+	top: 0;
+	height: 100%;
+	overflow: hidden;
+	width: auto;
+	img{
+		width: 100%;
+		object-fit: cover;
+	}
+}
+
+@mixin boxShadow(){
+	-webkit-box-shadow: 0px 0px 14px -1px $color-gray-dark;
+	-moz-box-shadow: 0px 0px 14px -1px $color-gray-dark;
+	box-shadow: 0px 0px 14px -1px $color-gray-dark;
+}
+@mixin boxShadowWithColor($color){
+	-webkit-box-shadow: 0px 0px 17px 0px $color-gray-dark;
+	-moz-box-shadow: 0px 0px 17px 0px $color-gray-dark;
+	box-shadow: 0px 0px 17px 0px $color-gray-dark;
+	transition: all .7s ease;
+}
+@mixin placeholderColor($color){
+	&::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+		color: $color;
+		opacity: 1; /* Firefox */
+	}
+
+	&:-ms-input-placeholder { /* Internet Explorer 10-11 */
+		color: $color;
+	}
+
+	&::-ms-input-placeholder { /* Microsoft Edge */
+		color: $color;
+	}
+}
+@mixin backgroundImageFixed(){
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: auto;
+}
+
+
+@mixin vertical-align($position: relative) {
+	position: $position;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}

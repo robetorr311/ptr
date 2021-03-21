@@ -1,0 +1,57 @@
+.bid-modal-wrapper{
+  .green-margins{
+    margin: 14px 50px;
+  }
+  .white-bold{
+    color: $color-white;
+    font-weight: bolder;
+  }
+  .white-thin{
+    color: $color-white;
+    font-weight: 200;
+    font-size: 2em;
+  }
+  .white-thin-p{
+    color:$color-white;
+    font-weight: 200;
+  }
+  .white-thin-p.transparent{
+    opacity: .6;
+    font-size: 1.2em;
+    margin-bottom: 0;
+  }
+  .header-offset{
+    margin-bottom: 15px;
+  }
+  .row.margin-bottom{
+    margin-bottom: 20px;
+  }
+  .btn-pth-orange{
+    background-color: $color-primary;
+    color: $color-white;
+    font-weight: bold;
+  }
+  .modal-dialog{
+    width: 100%;
+    max-width: 800px;
+  }
+  .modal-content{
+    border: none;
+    background-color: $color-secondary;
+  }
+  .input-group-text.green{
+    color: $color-secondary;
+    background-color: $color-white;
+    font-weight: bold;
+    border: none;
+  }
+  .input-group-prepend{
+    border: none;
+  }
+  .form-control{
+    border: none;
+  }
+  .padding-top{
+    padding-top: 25px;
+  }
+}

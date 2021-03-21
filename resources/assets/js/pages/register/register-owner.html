@@ -1,0 +1,154 @@
+<div xmlns="http://www.w3.org/1999/html">
+
+    <div class="container sign-in-container">
+        <div class="row">
+            <div class="col-lg-7 offset-lg-1">
+                <div class="sign sign-partial active">
+                    <!--PET OWNER SIGN UP-->
+                    <div v-show="isVisibleOwner && !signInFormActive" class="sign-wrapper">
+                        <h1 class="subtitle--secondary"> Get a free quote. Only pay when the transport of your loved one is completed.</h1>
+                        <h6 style="color: #f18519;">A Quick & Easy Transporatation</h6>
+
+                        <form id="ownerForm" method="POST" enctype="multipart/form-data" v-on:submit.prevent="validateForm()" :action="ownerRegistrationEndpoint">
+
+                            <input type="hidden" name="_token" :value="csrfToken">
+                            <div class="form-group owner-form">
+
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6 col-sm-12">
+                                        <div class="row">
+                                            <div class="col-md-12" style="margin-bottom: 10px;">
+                                                <!-- <label for="name">Name:</label> -->
+                                                <div class="validation">
+                                                    <input type="text" class="form-control border-radius-top" aria-describedby="name"
+                                                            v-model="ownerForm.name"
+                                                            name="name"
+                                                            v-validate="'required'"
+                                                            :class="errors.has('name') ? 'error' : ''"
+                                                            placeholder="Name"
+                                                    >
+                                                    <div class="validation-error" v-if="errors.has('name')">
+                                                        <span>{{ errors.first('name') }} <i class="fa fa-times"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" style="margin-bottom: 10px;">
+                                                <div class="validation">
+                                                    <!-- <label for="email">Email:</label> -->
+                                                    <input type="text" class="form-control" aria-describedby="emailHelp"
+                                                            v-model="ownerForm.email"
+                                                            name="email"
+                                                            v-validate="'required|email'"
+                                                            :class="errors.has('email') ? 'error' : ''"
+                                                            placeholder="Email"
+                                                    >
+                                                    <div class="validation-error" v-if="errors.has('email')">
+                                                        <span>{{ errors.first('email') }} <i class="fa fa-times"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" style="margin-bottom: 10px;">
+                                                <div class="validation">
+                                                    <!-- <label for="phone">Phone:</label> -->
+                                                    <input type="text" class="form-control" aria-describedby="phone"
+                                                            v-model="ownerForm.phone"
+                                                            name="phone"
+                                                            v-validate="'required'"
+                                                            :class="errors.has('.phone') ? 'error' : ''"
+                                                            placeholder="Phone"
+                                                    >
+                                                    <div class="validation-error" v-if="errors.has('phone')">
+                                                        <span>{{ errors.first('phone') }} <i class="fa fa-times"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" style="margin-bottom: 10px;">
+                                                <!--AVATAR UPLOAD-->
+                                                <div v-show="!avatarPreview.image" class="form-group upload-container">
+                                                    <div class="upload-btn-wrapper sign-up-upload" style="display: inline-flex;">
+                                                        <a href="javascript:void(0);" class="btn"><img src="/img/upload.png"></a>
+                                                        <input type="file"
+                                                            aria-describedby="ownerForm.avatar"
+                                                            name="avatar"
+                                                        ref="avatar"
+                                                            @change="handleAvatar"
+                                                        >
+                                                        <div class="upload-title" style="padding-left: 10px;">
+                                                            <span class="upload-heading">Upload Picture</span>
+                                                            <span class="sign-up">Choose File <i class="fa fa-chevron-right"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div v-if="avatarPreview.image" class="preview-file-wrapper">
+                                                    <div class="image-wrapper" :style="'background-image: url(' + avatarPreview.image + ')'"></div>
+                                                    <div class="content-wrapper">
+                                                        Avatar
+                                                    </div>
+                                                    <div class="delete-wrapper">
+                                                        <a @click="removeAvatar" href="javascript:void(0);"><span>Remove <i class="fa fa-times"></i></span></a>
+                                                    </div>
+                                                </div>
+                                                <span class="has-error" v-if="errors.has('formOwnerReg.avatar')">{{ errors.first('formOwnerReg.avatar') }}</span>
+                                                <!--AVATAR UPLOAD END--> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-12">
+                                        <div class="col-md-12" style="margin-bottom: 10px;">
+                                            <div class="validation">
+                                                <!-- <label for="password">Password:</label> -->
+                                                <input type="password" class="form-control" aria-describedby="password"
+                                                        v-model="ownerForm.password"
+                                                        ref="password"
+                                                        name="password"
+                                                        v-validate="'required'"
+                                                        :class="errors.has('password') ? 'error' : ''"
+                                                        placeholder="Password"
+                                                >
+                                                <div class="validation-error" v-if="errors.has('password')">
+                                                    <span>{{ errors.first('password') }} <i class="fa fa-times"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12" style="margin-bottom: 10px;">
+                                            <div class="validation">
+                                                <!-- <label for="password">Retype Password:</label> -->
+                                                <input type="password" class="form-control border-radius-bottom" aria-describedby="password"
+                                                        v-model="ownerForm.password_confirmation"
+                                                        name="password_confirmation"
+                                                        data-vv-as="password confirmation"
+                                                        v-validate="'required'"
+                                                        :class="errors.has('password_confirmation') ? 'error' : ''"
+                                                        placeholder="Retype Password"
+                                                >
+                                                <div class="validation-error" v-if="errors.has('password_confirmation')">
+                                                    <span>Required <i class="fa fa-times"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6 col-sm-12" style="margin-bottom: 10px;">
+                                        <p><input type="checkbox" name="terms"
+                                            data-vv-as="terms"
+                                            v-validate="'required'"
+                                            :class="errors.has('terms') ? 'error' : ''"
+                                  > I accept the <u>Terms and Conditions</u></p>
+                                  <span class="has-error" v-if="errors.has('terms')">{{ errors.first('terms') }}</span>
+                                  <button  type="submit" class="btn btn--primary btn--primary--fill btn--full btn--detached">REGISTER</button>
+                                </div>
+                                <div class="col"></div>
+                            </div>
+                        </form>
+                    </div>
+                    <!--PET OWNER SIGN UP END-->
+                </div>
+            </div>
+            <div class="col-md-2">
+                <img class="column-cover-img" src="/img/animal-lover.png" style="height:80%; top:100px;">
+            </div>
+        </div>
+    </div>
+</div>

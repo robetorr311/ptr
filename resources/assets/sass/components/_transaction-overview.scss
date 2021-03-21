@@ -1,0 +1,89 @@
+.transaction-overview{
+    text-align: center;
+    margin-bottom: 25px;;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    .details{
+        margin-right: 30px;
+        position: relative;
+        @include boxShadow();
+        border-radius: 5px;
+        min-width: 200px;
+        min-height: 207px;
+        margin-bottom: 10px;
+        span{
+            display: block;
+        }
+        &__bid{
+            padding: 10px;
+            .amount{
+                font-size: 24px;
+                color: $color-secondary;
+            }
+        }
+        .person{
+            padding: 10px;
+            label{
+                margin-right: 5px;
+            } 
+            .avatar{
+                margin-right: 5px;
+                margin-bottom: -9px;
+                display: inline-block;
+                background-position: top center;
+                background-size: cover;
+            }
+            margin-bottom: 10px;
+            @include clearfix();
+        }
+        &__link{
+            width: 100%;
+            text-align: right;
+            padding: 5px 10px;
+            border-top: 1px solid $color-gray-light;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            a{
+                @include colorLink($color-gray-dark, $color-gray-dark); 
+            }
+            
+        }
+    }
+}
+a.transaction-load-more{
+    float: left;
+    width: 20%;
+    min-width: 241px;
+    text-align: center;
+    height: 205px;
+    span.big-green-text{
+        margin-top: 34px;
+    }
+    &:hover{
+        cursor: pointer;
+        @include boxShadowWithColor($green-primary);
+    }
+}
+@media only screen and (max-width: 768px) {
+    .transaction-overview{
+        .details{
+            margin-bottom: 30px;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,33 @@
+// Colors
+$color-primary: #f18519; // Orange
+$color-secondary: #047f03; //Green
+$color-black: #000000;
+$color-white: #ffffff;
+
+$orange-primary: #f18519;
+$orange-primary-lighten: #ffca2c;
+$green-primary: #047f03;
+$green-primary-lighten: #04b903;
+$green-primary-dark: #067105;
+
+$color-info: #0088cc; // Blue
+$color-success: #377f31; // Green
+$color-danger: #d33f3a; // Red
+$color-warning: #dba909; // Yellow
+
+$color-gray-dark: rgb(128, 128, 128);
+$color-gray-light: #ebebeb;
+
+
+
+// Font Stacks
+$font-primary: "Helvetica Neue", Arial, sans-serif;
+$font-secondary: Georgia, Times, serif;
+$font-monospace: Menlo, Monaco, "Courier New", monospace;
+
+
+// Breakpoints
+$max-phone: 767px;
+$min-tablet: 768px;
+$max-tablet: 991px;
+$min-desktop: 992px;

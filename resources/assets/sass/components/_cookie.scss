@@ -1,0 +1,33 @@
+.cookie{
+  position: fixed;
+  bottom: 0;
+  left:0;
+  width: 100%;
+  padding: 25px 15px;
+  background: #fafafa;
+  z-index: 100000;
+  &__text{
+    text-align: left;
+    margin-right: 150px;
+  }
+  .btn--cookie{
+    position: absolute;
+    right:15px;
+    top: 25px;
+  }
+}
+
+@media (max-width: $max-phone){
+  .cookie{
+    &__text{
+      text-align: left;
+      margin-right: 0px;
+    }
+    .btn--cookie{
+      display: block;
+      margin-top: 10px;
+      position: relative;
+      top:0;
+    }
+  }
+}

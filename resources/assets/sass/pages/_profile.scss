@@ -1,0 +1,87 @@
+.who{
+    .avatar{
+        float: left;
+        margin-top: 10px;
+    }
+    .details{
+        float: left;
+        margin-left: 20px;
+    }
+    .name{
+        font-size: 24px;
+        color: $color-gray-dark;
+    }
+    .role{
+        font-size: 18px;
+        font-weight: bold;
+        color: $color-secondary;
+    }
+    .reviewing{
+        span{
+            color: $color-primary;
+            font-size: 16px;
+        }
+        margin: 15px 0 15px 50px;
+    }
+    .reviewer, .reviewee{
+        @include clearfix();
+    }
+}
+.btn-load-more{
+    text-align: center;
+    span{
+        display: block;
+        &.big-green-text{
+            color: $green-primary;
+            font-size: 36px;
+            font-weight: 300;
+        }
+    }
+    i{
+        color: $color-gray-dark;
+    }
+    &:hover{
+        cursor: pointer;
+        @include boxShadowWithColor($green-primary);
+    }
+}
+a.add-new-box{
+    display: block;
+    width: 45%;
+    min-width: 241px;
+    height: 279px;
+    margin: 10px auto;
+    text-align: center;
+    @include boxShadow();
+    transition: all .7s ease;
+    i{
+        margin-top: 107px;
+        font-size: 36px;
+        color: $green-primary;
+    }
+    &:hover{
+        cursor: pointer;
+        @include boxShadowWithColor($green-primary);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

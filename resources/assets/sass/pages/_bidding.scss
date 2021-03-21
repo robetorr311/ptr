@@ -1,0 +1,217 @@
+.status{
+    display: inline-block;
+    border-radius: 5px;
+    padding: 4px;
+    color: $color-gray-dark;
+    font-size: 20px;
+    border: 1px solid $color-gray-dark;
+    margin-left: 10px;
+    b{
+        font-size: inherit;
+        color: $color-secondary;
+        font-weight: bold;
+    }
+}
+.bid-box{
+    position: relative;
+    padding: 35px 0 35px 0;
+    &::before{
+        content:"";
+        display: block;
+        background: $color-secondary;
+        position: absolute;
+        left: -50%;
+        right: -50%;
+        top: 0;
+        height: 100%;
+        overflow: hidden;
+        width: auto;
+    }
+    
+}
+.bid-placement{
+    .input-group-addon:first-of-type{
+        background: white;
+        border-color: white;
+        font-weight: bold;
+        color: $color-secondary;
+    }
+    span{
+        &.input-dollar-sign{
+            position: absolute;
+            z-index: 100;
+            color: $green-primary;
+            top: 3px;
+            left: 3px;
+            font-size: 23px;
+        }
+    }
+    input{
+        border-color: white;
+        outline: none;
+        border-radius: 5px 0 0 5px;
+        padding-left: 25px;
+        &.form-control{
+            border-top-left-radius: 3px !important;
+            border-bottom-left-radius: 3px !important;
+        }
+    }
+    .input-group-addon:last-of-type{
+        background: $color-primary;
+        border-color: $color-primary;
+        padding: 9px;
+        border-radius: 0 5px 5px 0;
+        transition: background-color .7s ease;
+        a{
+            @include colorLink(white, white);
+            padding: 8px 18px;
+            font-weight: bold;
+
+        }
+        &:hover{
+            background-color: $orange-primary-lighten;
+            transition: background-color .7s ease;
+        }
+        
+    }
+}
+.bid-title{
+    font-weight: 200;
+    color: white;
+    margin-bottom: 20px;
+}
+.bid-detail.current-bid{
+    text-align: center;
+    span{
+        display: block;
+        &.bid-detail__heading{
+            margin-bottom: 20px;
+        }
+        &.bids-amount{
+            color: $color-white;
+            font-weight: bold;
+            font-size: 22px;
+        }
+    }
+    img{
+        opacity: 0.6;
+    }
+    bid-detail__heading{
+        opacity: 1;
+    }
+}
+.bid-detail{
+    position: relative;
+    color: white;
+    &__heading{
+        font-size: 20px;
+        color: inherit; 
+        display: block;
+        opacity: 0.6;
+    }
+    &__info{
+        font-size: 36px;
+        color: inherit;
+        display: block;
+    }
+}
+.transport-location{
+    input{
+        color: $color-secondary;
+    }
+    .btn{
+        margin-top: 35px;
+    }
+}
+#map{
+    width: 100%;
+    height: 400px;
+}
+.comment{
+    margin-bottom: 20px;
+    &:first-of-type{
+        margin-top: 90px;
+    }
+    &-user{
+        @include clearfix();
+        >div{
+            float: left;
+            margin-right: 10px;
+        }
+        &__name{
+            color: $color-gray-dark;
+            line-height: 30px;
+        }
+        &__type{
+            text-transform: uppercase;
+            color: $color-gray-dark;
+            font-weight: 100;
+            border: 1px solid $color-secondary;
+            border-radius:5px;
+            padding: 5px 8px;
+            font-size: 12px;
+        }
+    }
+    &__text{
+        padding: 20px;
+        border: 1px solid $color-gray-light;
+        border-radius: 5px;
+        margin: 10px 0 20px 0;
+        &--time{
+            color: $color-primary;
+            font-weight: 400;
+            font-size: 14px;
+        }
+    }
+    .report-comment{
+        float: right;
+        @include colorLink($color-gray-dark, $color-gray-dark);
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+}
+
+@media screen and (max-width: $max-tablet){
+    .bid-box{
+        padding-bottom: 50px;
+    }
+    .bid-detail{
+        &__heading{
+        }
+        &__info{
+            padding-bottom: 70px;
+            &.line::after{ 
+                bottom: 35px;
+            }
+        }
+    }
+    .bid-placement{
+        margin-bottom: 20px;
+    }
+    .transport-location{
+        .transport-detail-map{
+            margin-top: 20px;
+        }
+    }
+}
+.buy-now-button-wrapper{
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column-reverse;
+    a{
+        width: 80%;
+        @media screen and (max-width: 768px){
+            width: 100%;
+        }
+    }
+    @media screen and (max-width: 993px){
+        display: block;
+        text-align: left;
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .bid-box{
+        text-align: center;
+    }
+}

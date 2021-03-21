@@ -1,0 +1,22 @@
+.thank-you-note-wrapper{
+  .thank-you-note{
+    padding: 24%;
+    h1{
+      color: $orange-primary;
+    }
+    p{
+      color: $color-gray-dark;
+      margin-bottom: 0;
+    }
+    div{
+      margin-top: 20px;
+      a{
+        font-weight: bold;
+        color: $green-primary;
+        i{
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}

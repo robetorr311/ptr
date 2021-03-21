@@ -1,0 +1,62 @@
+@import "~vue-slider-component/dist-css/vue-slider-component.css";
+
+//Configurations, functions, mixins
+@import "config";
+@import "mixins";
+@import "default";
+@import "~aos/dist/aos.css";
+
+//Basic building elements and settings
+
+@import "components/banners"; 
+@import "components/breadcrumb";
+@import "components/buttons"; 
+@import "components/cookie";
+@import "components/elements";
+@import "components/forms";
+@import "components/file-uploader";
+@import "components/loader";
+@import "components/cashout";
+@import "components/stripe-connect";
+@import "components/bidding-list";
+@import "components/notifications";
+@import "components/validation";
+@import "components/upload-file";
+@import "components/edit-profile-modal";
+@import "components/bid-now-modal";
+@import "components/add-pet-modal";
+@import "components/header-mobile";
+
+// Basic layout components
+@import "components/layout";
+@import "components/header";
+@import "components/nav";
+@import "components/footer";
+@import "components/user-menu";
+
+//pages
+@import "pages/about-us";
+@import "pages/bidding";
+@import "pages/post-transport"; 
+@import "pages/contact-us";
+@import "pages/profile";
+@import "pages/review";
+@import "pages/search";
+@import "pages/thank-you";
+@import "pages/my-transport";
+@import "pages/search-geo";
+@import "pages/landing";
+@import "pages/register";
+
+//Building blocks
+@import "components/profile-box";
+@import "components/review-box";
+@import "components/transport-overview";
+@import "components/transaction-overview";
+@import "components/pet-overview";
+@import "components/search-result";
+@import "components/sign-in";
+@import "components/sign-up";
+@import "components/faq";
+
+@import "~toastr/toastr";

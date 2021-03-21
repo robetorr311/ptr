@@ -1,0 +1,237 @@
+.map-marker{
+    .form-control{
+        border-left-color: white;
+
+        &:focus{
+            border-left-color: #80bdff; 
+        }
+    }
+    .input-group-addon{
+        background: none;
+    }
+    .fa{
+        color: $color-secondary;
+    }
+}
+.pets-overview{
+    &--number{
+        color: $color-secondary;
+    }
+}
+.pet-transport{
+    .pet-overview{
+        margin-top: 75px;
+    }
+
+}
+
+.green-bg {
+    background: darkgreen !important;
+    color: white !important;
+}
+
+.white-bg {
+    background: white;
+}
+
+.select{
+    display: block;
+    color: white;
+    @include colorLink(white, white);
+    background: $color-secondary;
+    font-weight: bold;
+    height: 45px;
+    line-height: 45px;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    font-weight: 800;
+    margin-top: 20px;
+    
+    span{
+        background: darkgreen;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        height: 100%;
+        display: block;
+        width: 30%;
+        text-align: center; 
+        float: left;
+    }
+    .fa-check{
+        color: white;
+        font-size: 18px;
+    }
+    &.active{
+        border-top: 1px solid $color-gray-light;
+        background: white;
+        @include colorLink($color-secondary, $color-secondary);
+        .fa-chevron-right{
+            color: $color-secondary;
+            font-size: 14px;
+        }
+    }
+     
+}
+a.checkbox{
+    display: block;
+    @include colorLink($color-gray-dark, $color-gray-dark);
+    background: white;
+    height: 45px;
+    line-height: 45px;
+    position: relative;
+    text-align: center;
+    border: 1px solid $color-gray-light;
+    border-radius: 9px;
+    overflow: hidden;
+    span{
+        background: darkgreen;
+        height: 100%;
+        display: block;
+        width: 45px;
+        text-align: center; 
+        float: left;
+    }
+    .fa{
+        color: white;
+        font-size: 18px;
+    }
+    &.active{
+        border-top: 1px solid $color-gray-light;
+        background: white;
+        @include colorLink($color-secondary, $color-secondary);
+    }
+}
+.add-pet{
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 20px;
+    left: 15px;
+}
+.transport-dates{
+    margin-top: 75px;
+    border: 1px solid darkgreen;
+    background: $color-secondary;
+    @include clearfix();
+    position: relative;
+    text-align: center;
+    .before{
+        border-right: 1px solid darkgreen;
+        width: 50%;
+        float: left;
+        padding: 50px 0;
+    }
+    .after{
+        width: 50%;
+        float: left;
+        padding: 50px 0;
+    }
+    label{
+        font-size: 20px;
+        color: $color-white;
+        display: block;
+    }
+    &__day{
+        font-size: 60px;
+        color: $color-white;
+        display: block;
+    }
+    &__mmyy{
+        font-size: 30px;
+        color: $color-white;
+        display: block;
+    }
+    .fa-chevron-right{
+        display: block;
+        color: $color-white;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        font-size: 30px;
+        margin: -10px 0 0 -10px;
+    }
+}
+
+@media screen and (max-width: $max-tablet) {
+    .add-pet{
+        position: relative;
+        left: 0;
+        margin-top: 20px;
+    }
+    .pet-transport{
+        .pet-overview{
+            margin-top: 0;
+        }
+    } 
+    
+}
+
+.pet-overview-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    .pet-overview{
+        min-width: 239px;
+        height: 280px;
+        width: 20%;
+        position: relative;
+        a.add-pet-button{
+            position: relative;
+            width: 100%;
+            height: 100%;
+            padding: calc(50% - 2px) 0;
+            transition: box-shadow .7s ease;
+            i{
+                display: block;
+                font-size: 41px;
+                margin-bottom: 10px;
+            }
+            &:hover{
+                @include boxShadowWithColor($green-primary);
+            }
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        .pet-overview{
+            margin-bottom: 15px;
+            a.add-pet-button{
+                padding: 109px 0;
+            }
+        }
+    }
+}
+.pets-overview-title-wrapper{
+    margin: 30px 0;
+    .pets-overview-title{
+        color: $orange-primary;
+        font-size: 1.75rem;
+        font-weight: bold;
+        margin-right: 10px;
+    }
+}
+.post-pet-transport-button-wrapper{
+    position: relative;
+    .post-pet-transport-button{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+    @media only screen and (max-width: 768px) {
+        height: 129px;
+        margin-top: 15px;
+        .post-pet-transport-button{
+            padding: 0  10px;
+        }
+    }
+}
+.budget {
+    margin-top: 15px;
+    margin-bottom: 0 !important;
+    input {
+        height: 41px;
+    }
+}
+input.datepicker.form-control{
+    padding: 6px 0 6px 5px;
+}

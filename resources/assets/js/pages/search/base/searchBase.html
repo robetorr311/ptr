@@ -1,0 +1,259 @@
+<div>
+    <div class="main-content">
+        <div class="container">
+            <div class="row">
+                <hr>
+                    <div class="col-12 col-lg-12">
+                        <div class="big-search">
+                            <div class="icon-holder">
+                                <a href="javascript:void(0)">
+                                    <i class="fa fa-search"></i>
+                                </a>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control borderless search-input" placeholder="Search Pet Travel...">
+                            </div>
+                        </div>
+                    </div>
+                <hr>
+                <div class="col-12 col-lg-12">
+                    <div class="search-fields-basic">
+                        <div class="form-group">
+                            <select class="form-control" id="exampleFormControlSelect1"
+                                v-model="form.biddable"
+                                v-on:change="submitForm"
+                            >
+                                <option value="">Bidding system</option>
+                                <option value="1">Biddable</option>
+                                <option value="0">Not Biddable</option>
+                            </select>
+                        </div>
+                        <div class="datepicker">
+                            <date-picker v-model="time1" :first-day-of-week="1" lang="en"></date-picker>
+                        </div>
+                        <div class="button-wrapper">
+                            <a v-show="!extraSearchVisible" @click="enableFilters()" href="javascript:void(0)" class="btn btn--plain btn--plain--transparent add-filters">
+                                <i class="fa fa-plus-circle"></i>
+                                <span>ADDITIONAL FILTERS</span>
+                            </a>
+                        </div>
+                        <div class="button-wrapper">
+                            <a :href="geoEndpoint" class="btn btn--secondary btn--secondary--fill">GEO SEARCH</a>
+                        </div>
+                    </div>
+
+
+                    <!--EXTRA FIELDS-->
+                    <div v-show="extraSearchVisible" class="extra-search">
+                        <div class="extra-fields">
+                            <div class="field-row">
+                                <div class="field-label">Start and End Point</div>
+                                <div class="form-group field1">
+                                    <input
+                                        placeholder="Start address"
+                                        class="form-control"
+                                        type="text"
+                                        name="start_address"
+                                        v-model="form.start_address"
+                                        @keyup="submitForm"
+                                    >
+                                </div>
+                                <div class="form-group">
+                                    <input
+                                            placeholder="Destination address"
+                                            class="form-control"
+                                            type="text"
+                                            name="destination_address"
+                                            v-model="form.destination_address"
+                                            @keyup="submitForm"
+                                    >
+                                </div>
+                            </div>
+                            <div class="field-row">
+                                <div class="field-label">Pet Information</div>
+                                <div class="form-group field1">
+                                    <select class="form-control"
+                                        v-model="form.pet_type"
+                                        v-on:change="submitForm"
+                                    >
+                                        <option value="">Pet Type</option>
+                                        <option value="dog">Dog</option>
+                                        <option value="cat">Cat</option>
+                                        <option value="bird">Bird</option>
+                                        <option value="fish">Fish</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control"
+                                            v-model="form.pet_weight"
+                                            v-on:change="submitForm"
+                                    >
+                                        <option value="25">Large ( < 50kg)</option>
+                                        <option value="25">Medium ( < 25kg)</option>
+                                        <option value="10">Small ( < 10kg)</option>
+                                        <option value="">All sizes</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="field-row">
+                                <div class="field-label">Pricing</div>
+                                <div class="form-group from-price">
+                                    <div>From</div>
+                                    <div class="input-group-addon">
+                                        <span>$</span>
+                                        <input type="number" class="form-control" value="0" min="0"
+                                            v-model="form.start_price"
+                                            @keyup="submitForm"
+                                        >
+                                    </div>
+                                </div>
+                                <div class="form-group to-price">
+                                    <div>To</div>
+                                    <div class="input-group-addon">
+                                        <span>$</span>
+                                        <input type="number" class="form-control" value="100" min="0"
+                                               v-model="form.end_price"
+                                               @keyup="submitForm"
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field-row">
+
+                            </div>
+                        </div>
+                        <div class="close-filters">
+                            <div class="button-wrapper">
+                                <a @click="disableFilters()" href="javascript:void(0)" class="btn btn--plain btn--plain--transparent add-filters">
+                                    <i class="fa fa-minus-circle"></i>
+                                    <span>CLOSE FILTERS</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--END EXTRA FIELDS-->
+                </div>
+                <hr>
+                <div class="col-12 col-lg-12 margin-bottom-20">
+                    <h3  class="section-title">Results</h3>
+                    <div class="tags-wrapper">
+                        <div class="tags-title">Tags</div>
+                        <div class="tag-item">Labrador <a href="javascript:void(0)"><i class="fa fa-times"></i></a></div>
+                        <div class="tag-item">New York <a href="javascript:void(0)"><i class="fa fa-times"></i></a></div>
+                        <div class="tag-item">16/08/17 <a href="javascript:void(0)"><i class="fa fa-times"></i></a></div>
+                        <div class="tag-item">20/08/17 <a href="javascript:void(0)"><i class="fa fa-times"></i></a></div>
+                        <div class="tag-item">Large <a href="javascript:void(0)"><i class="fa fa-times"></i></a></div>
+                    </div>
+                    <!--TRANSPORT OVERVIEW-->
+                    <a v-if="paginator" v-for="transport in paginator.data" :key="transport.id" :href="'/driver/transport/' + transport.id" class="transport clickable">
+                        <div class="location">
+                            <div class="avatar-uni" style="background-image:url('/img/profile.jpg')"></div>
+                            <div class="address">
+                                <span>{{ transport.departure_address }}</span>
+                            </div>
+                            <div>
+                                <i class="fa fa-chevron-down"></i>
+                            </div>
+                            <div class="address">
+                                <span>{{ transport.destination_address }}</span>
+                            </div>
+                            <img src="/img/search-pet.png" alt="">
+                        </div>
+                        <div class="date-from-to">
+                            <div class="from">
+                                <span class="date-title">{{ transport.departure_type }}</span>
+                                <span class="date-day">{{ transport.departure_date_format.day }}</span>
+                                <span class="date-rest">{{ transport.departure_date_format.month }}, {{ transport.departure_date_format.year }}</span>
+                            </div>
+                            <div class="to">
+                                <span class="date-title">{{ transport.arrival_type }}</span>
+                                <span class="date-day">{{ transport.arrival_date_format.day }}</span>
+                                <span class="date-rest">{{ transport.arrival_date_format.month }}, {{ transport.arrival_date_format.year }}</span>
+                            </div>
+                        </div>
+                        <div class="pet-details">
+                            <div v-if="transport.pets.length > 1">
+                                <span>{{ transport.pets.length }} pets</span>
+                            </div>
+                            <div v-else>
+                                <div class="atr-names">
+                                    <span>Type</span>
+                                    <span>Weight</span>
+                                    <span>Size</span>
+                                </div>
+                                <div class="atr-values">
+                                    <span>{{ transport.pets[0].type}}</span>
+                                    <span>{{ transport.pets[0].weight}} kg</span>
+                                    <span>{{ transport.pets[0].size}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="details">
+                            <div class="details__status">
+                                <label for="">Status</label>
+                                <span class="warning">You bidded</span>
+                            </div>
+                            <div class="details__bid">
+                                <label for="">Budget</label>
+                                <span class="amount">{{ transport.budget }}<sup>$</sup></span>
+                            </div>
+                            <div class="details__link">
+                                <a v-if="transport.biddable" href="javascript:void(0)" @click="openBidModal(transport.id)" class="btn btn--secondary btn--secondary--fill">BID NOW</a>
+                                <a v-if="transport.first_bid_buy" href="javascript:void(0)" @click="openBidModal(transport.id)" class="btn btn--primary btn--primary--fill">ACCEPT PRICE</a>
+                                <a href="#" class="btn-right"> <i class="fa fa-chevron-right"></i> </a>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!--END-->
+
+
+                    <!--<a href="#" class="btn btn&#45;&#45;plain btn&#45;&#45;plain&#45;&#45;transparent btn&#45;&#45;full btn-load-more">-->
+                        <!--<span class="big-green-text">235</span>-->
+                        <!--<span>More Transports to See</span>-->
+                        <!--<i class="fa fa-chevron-down"></i>-->
+                    <!--</a>-->
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--BID MODAL-->
+    <div class="modal fade" id="bidModal" role="dialog" aria-hidden="true" aria-labelledby="bidModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bidModalLabel">Place A Bid</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="bidForm" method="post" v-on:submit.prevent="validateForm()">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input class="form-control"
+                                   placeholder="Amount $"
+                                   name="amount"
+                                   v-validate="'required|numeric|min_value:0'"
+                                   v-model="bid.amount"
+                                   :class="errors.has('petForm.name') ? 'error' : ''"
+                            >
+                            <span class="has-error" v-if="errors.has('amount')">
+                                {{ errors.first('amount') }}
+                            </span>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" @click="closeBidModal">Close</button>
+                        <button type="submit" class="btn btn-full btn--primary btn--primary--fill">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

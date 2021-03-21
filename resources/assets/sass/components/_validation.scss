@@ -1,0 +1,15 @@
+.validation {
+  position: relative;
+  .validation-error {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    span {
+      color: $color-danger;
+      font-size: 11px;
+      i{
+        color: $color-danger;
+      }
+    }
+  }
+}

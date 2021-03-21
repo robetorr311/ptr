@@ -1,0 +1,43 @@
+.transportation{
+  font-size: 1.5rem;
+  color: gray;
+  font-weight: 200;
+  text-align: center;
+}
+.badge.status-badge{
+  border: solid 1px grey;
+  border-radius: 5px;
+  font-weight: 900;
+  color: gray;
+  transform: translateY(35%);
+}
+.open{
+  color: #047f03;
+}
+.btn.pth-button{
+  background-color: #047f03;
+  color: white;
+  font-weight: bold;
+}
+input.form-control:focus{
+  box-shadow: none;
+  border-color: initial;
+}
+.validated{
+  border-color: #047f03;
+}
+.not-validated{
+  border-color: red;
+}
+.custom-gray-fill{
+  background-color: #f9f9f9;
+}
+.cashout{
+  min-height: 250px;
+  margin-top: 50px;
+}
+@media only screen and (max-width: 425px) {
+  .badge.status-badge{
+    margin-bottom: 15px;
+  }
+}

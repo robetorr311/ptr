@@ -1,0 +1,327 @@
+.transport{
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+    @include boxShadow();
+    .location{
+        background: $color-secondary;
+        padding: 10px 10px 10px 110px;
+        border-bottom-left-radius: 5px;
+        border-top-left-radius: 5px;
+        width: 30%;
+        float: left;
+        overflow: hidden; 
+        position: relative;
+        .avatar-uni {
+            position: absolute;
+            top: 26px;
+            left: 20px;
+            /* make a square container */
+            width: 80px;
+            height: 80px;
+
+            /* fill the container, preserving aspect ratio, and cropping to fit */
+            background-size: cover;
+
+            /* center the image vertically and horizontally */
+            background-position: top center;
+
+            /* round the edges to a circle with border radius 1/2 container size */
+            border-radius: 50%;
+            border: 3px solid $color-gray-dark;
+        }
+        .address{
+            font-size: 14px;
+            font-family: 'Open-Sans', sans-serif;
+            span{
+                color: $color-white;
+                font-size: inherit;
+                display: block;
+                font-weight: bold;
+            }
+        }
+        
+        .fa{
+            color: $color-primary;
+        }
+        img{
+          position: absolute;
+          top: 15px;
+          right: -18px;
+        }
+    }
+    .date-from-to{
+        width: 20%;
+        float: left;
+        position: relative;
+        padding: 10px;
+        border-top: 1px solid $color-gray-light;
+        border-right: 1px solid $color-gray-light;
+        border-bottom: 1px solid $color-gray-light;
+        text-align: center;
+        font-family: 'Open Sans', sans-serif;
+        font-style: normal;
+        .from{
+            display: inline-block;
+            width: 46%;
+            border-right: 1px solid $color-gray-light;
+            span{
+                display: block;
+                &.date-day{
+                    font-size: 36px;
+                    color: $orange-primary;
+                }
+                &.date-rest{
+                    font-size: 15px;
+                    line-height: 0.5;
+                    color: $orange-primary;
+                }
+
+            }
+          &:after{
+            position: absolute;
+            top: 49px;
+            left: 101px;
+            font-family: FontAwesome;
+            content: "\F054";
+            color: #e0e0e0;
+            font-size: 17px;
+          }
+        }
+        .to{
+            display: inline-block;
+            width: 46%;
+            span{
+                display: block;
+                &.date-day{
+                    font-size: 36px;
+                    color: $green-primary;
+                }
+                &.date-rest{
+                    font-size: 15px;
+                    line-height: 0.5;
+                    color: $green-primary;
+                }
+            }
+        }
+        .date-title{
+            font-size: 13px;
+        }
+
+    }
+    .pet-details{
+        width: 20%;
+        float: left;
+        position: relative;
+        padding: 10px;
+        border-top: 1px solid $color-gray-light;
+        border-right: 1px solid $color-gray-light;
+        border-bottom: 1px solid $color-gray-light;
+        .plural{
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          justify-content: space-evenly;
+          height: 100%;
+          div{
+            span{
+              color: $green-primary;
+              font-family: 'Open Sans', sans-serif;
+              font-size: 65px;
+            }
+          }
+        }
+        .atr-names{
+            display: inline-block;
+            width: 45%;
+            margin-left: 2%;
+            margin-top: 10px;
+            line-height: 1.8;
+            font-family: 'Open Sans', sans-serif;
+            span{
+                display: block;
+            }
+        }
+        .atr-values{
+            display: inline-block;
+            width: 45%;
+            margin-top: 10px;
+            line-height: 1.8;
+            span{
+                display: block;
+                color: $color-gray-dark;
+                font-weight: 800;
+            }
+        }
+    }
+    .details{
+        width: 30%;
+        float: left;
+        position: relative;
+        padding: 10px;
+        border-top: 1px solid $color-gray-light;
+        border-right: 1px solid $color-gray-light;
+        border-bottom: 1px solid $color-gray-light;
+        border-bottom-right-radius: 5px;
+        border-top-right-radius: 5px;
+        label, span{
+            display: block;
+        }
+        &__status{
+            display: block;
+            width: 50%;
+            float: left;
+            label{
+                font-family: 'Open Sans', sans-serif;
+            }
+        }
+        .warning, .success, .danger{
+            font-weight: bold;
+        }
+        span.warning{
+            color: $green-primary;
+        }
+        &__bid{
+            float: left;
+            width: 50%;
+            font-family: 'Open Sans', sans-serif;
+            label{
+                margin-bottom: 0;
+            }
+            .amount{
+                font-size: 28px;
+                color: $color-secondary;
+            }
+        }
+        &__link{
+            width: 100%;
+            height: 34px;
+            position: absolute; 
+            bottom: 0;
+            left: 0;
+            text-align: right;
+            border-top: 1px solid $color-gray-light;
+            a{
+                &.full-width {
+                    width: 90% !important;
+                }
+                padding: 5px 10px;
+                font-weight: bold;
+                height: 34px;
+                @include colorLink($color-gray-dark, $color-gray-dark); 
+                &.bid{
+                    float: left;
+                    width: 50%;
+                    @include colorLink($color-white, $color-white); 
+                    background: $color-primary; 
+                    text-align: center;
+                    overflow: hidden;
+                }
+                &.buy{
+                    float: left;
+                    width: 50%;
+                    @include colorLink($color-gray-dark, $color-gray-dark); 
+                    padding-right: 40px;
+                    overflow: hidden;
+                }
+                &.go{
+                    position: absolute;
+                    display: block;
+                    right: 0px;
+                    bottom: 0px;
+                    border-left: 1px solid $color-gray-light;
+                    @include colorLink($color-gray-dark, $color-gray-dark); 
+                }
+                &.btn--secondary{
+                    float: left;
+                    border-radius: 0;
+                    width: 90%;
+                    color: $color-white;
+                }
+                &.btn--primary{
+                    float: left;
+                    border-radius: 0;
+                    width: 45%;
+                    color: $color-white;
+                }
+                &.btn-right{
+                    width:10%;
+                    position: relative;
+                    i{
+                        position: absolute;
+                        top: 18px;
+                        right: 11px;
+                    }
+                }
+            }
+            
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .transport .date-from-to .from:after{
+        display: none;
+    }
+    .location{
+        width: 100% !important;
+    }
+    .date-from-to{
+        width: 100% !important;
+
+    }
+    .date-from-to{
+        width: 100% !important;
+    }
+    .pet-details{
+        width: 100% !important;
+    }
+    .details{
+        width: 100% !important;
+        height: 128px !important;
+    }
+    .profile-details{
+        margin-bottom: 80px;
+    }
+    .pet-overview {
+        width: 100% !important;
+    }
+    .add-new-box {
+        width: 100% !important;
+    }
+    .transaction-overview {
+        width: 100% !important;
+    }
+    .transaction-load-more{
+        width: 100% !important;
+        margin-bottom: 20px;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    .bidding-list-wrapper{
+        height: 640px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

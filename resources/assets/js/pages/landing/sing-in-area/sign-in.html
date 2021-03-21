@@ -1,0 +1,336 @@
+<div class="container">
+    <div class="row">
+
+<div class="sign-in-wrapper col-lg-4 offset-lg-8">
+    <div class="sign-in-buttons">
+        <div class="row login">
+            <!--<div class="col-6">-->
+                <!--<a id="ownerLoginButton" href="javascript:void(0)" class="sign-in-avatar signControl" @click="toggleOwner">-->
+                    <!--<img src="/img/pet_owner_avatar.png" alt="">-->
+                    <!--<span>Pet Owner</span>-->
+                    <!--<i class="fa fa-caret-down"></i>-->
+                <!--</a>-->
+            <!--</div>-->
+            <!--<div class="col-6">-->
+                <!--<a id="driverLoginButton" href="javascript:void(0)" class="sign-in-avatar signControl" @click="toggleDriver">-->
+                    <!--<img src="/img/pet_driver_avatar.png" alt="">-->
+                    <!--<span>Pet Driver</span>-->
+                    <!--<i class="fa fa-caret-down"></i>-->
+                <!--</a>-->
+            <!--</div>-->
+
+            <!-- <div class="login-navigation-wrapper">
+                <div class="sign-left">
+                    <a id="ownerLoginButton" href="javascript:void(0)" class="sign-in-avatar signControl" @click="toggleOwner">
+                        <img src="/img/pet_owner_avatar.png" alt="">
+                        <span>Pet Owner</span>
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+                </div>
+                <div class="sign-right">
+                    <a id="driverLoginButton" href="javascript:void(0)" class="sign-in-avatar signControl" @click="toggleDriver">
+                        <img src="/img/pet_driver_avatar.png" alt="">
+                        <span>Pet Driver</span>
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+                </div>
+            </div> -->
+
+            <!--<div v-on-clickaway="hideForm" v-show="(isVisibleOwner || isVisibleDriver) && signInFormActive" id="signIn" class="sign sign-partial box active">-->
+            <div class="sign sign-partial box active">
+                <!--PET OWNER LOGIN-->
+                <div v-show="(isVisibleOwner || isVisibleDriver) && signInFormActive" class="sign-wrapper">
+                    <h2>Welcome Back!</h2>
+                    <h4 class="subtitle--secondary">Log in</h4>
+
+                    <form id="loginForm" method="post" :action="loginEndpoint" data-vv-scope="loginForm" v-on:submit.prevent="validateForm('loginForm')">
+                        <input type="hidden" name="_token" :value="csrfToken">
+                        <div class="form-group validation">
+                            <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Email or Username"
+                                   name="email"
+                                   v-validate="'required|email'"
+                                   :class="errors.has('loginForm.email') ? 'error' : ''"
+                            >
+                            <div class="validation-error" v-if="errors.has('loginForm.email')">
+                                <span>{{ errors.first('loginForm.email') }} <i class="fa fa-times"></i></span>
+                            </div>
+
+                        </div>
+                        <div class="form-group validation">
+                            <input type="password" class="form-control" aria-describedby="password" placeholder="Password"
+                                   name="password"
+                                   v-validate="'required'"
+                                   :class="errors.has('loginForm.password') ? 'error' : ''"
+                            >
+                            <div class="validation-error" v-if="errors.has('loginForm.password')">
+                                <span>{{ errors.first('loginForm.password') }} <i class="fa fa-times"></i></span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn--primary btn--primary--fill btn--full btn--detached">LOG IN</button>
+
+                    </form>
+                </div>
+                <!--PET OWNER END-->
+
+                 <!--PET DRIVER SIGNUP-->
+<!-- 
+               
+                <div v-show="isVisibleDriver && !signInFormActive" class="sign-wrapper">
+                    <h2>Become a Pet Travel Hub Driver</h2>
+                    <h4 class="subtitle--secondary">Register</h4>
+
+                    <form :action="driverEndpoint" method="post" enctype="multipart/form-data" id="driverForm" v-on:submit.prevent="submitDriverForm">
+                        <input type="hidden" name="_token" :value="csrfToken">
+                        <div class="form-group owner-form">
+                            <div v-show="driverFormStep === 1">
+                                <div class="validation">
+                                    <input type="text" class="form-control" aria-describedby="name" placeholder="Name"
+                                           v-model="driverForm.name"
+                                           name="name"
+                                           data-vv-scope="step1"
+                                           v-validate="'required'"
+                                           :class="errors.has('step1.name') ? 'error' : ''"
+                                    >
+                                    <div class="validation-error" v-if="errors.has('step1.name')">
+                                        <span>{{ errors.first('step1.name') }} <i class="fa fa-times"></i></span>
+                                    </div>
+                                </div>
+                                <div class="validation">
+                                    <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Email"
+                                           v-model="driverForm.email"
+                                           name="email"
+                                           v-validate="'required|email'"
+                                           data-vv-scope="step1"
+                                           :class="errors.has('step1.email') ? 'error' : ''"
+                                    >
+                                    <div class="validation-error" v-if="errors.has('step1.email')">
+                                        <span>{{ errors.first('step1.email') }} <i class="fa fa-times"></i></span>
+                                    </div>
+                                </div>
+                                <div class="validation">
+                                    <input type="password" class="form-control" aria-describedby="password" placeholder="Password"
+                                           v-model="driverForm.password"
+                                           name="password"
+                                           v-validate="'required'"
+                                           data-vv-scope="step1"
+                                           :class="errors.has('step1.password') ? 'error' : ''"
+                                    >
+                                    <div class="validation-error" v-if="errors.has('step1.password')">
+                                        <span>{{ errors.first('step1.password') }} <i class="fa fa-times"></i></span>
+                                    </div>
+                                </div>
+                                <div class="validation">
+                                    <input type="password" class="form-control" aria-describedby="password" placeholder="Retype Password"
+                                           v-model="driverForm.password_confirmation"
+                                           name="password_confirmation"
+                                           data-vv-as="password confirmation"
+                                           v-validate="'required'"
+                                           data-vv-scope="step1"
+                                           :class="errors.has('step1.password_confirmation') ? 'error' : ''"
+                                    >
+                                    <div class="validation-error" v-if="errors.has('step1.password_confirmation')">
+                                        <span>Required <i class="fa fa-times"></i></span>
+                                    </div>
+                                </div>
+                                <div class="validation">
+                                    <input type="text" class="form-control" aria-describedby="phone" placeholder="Phone"
+                                           v-model="driverForm.phone"
+                                           name="phone"
+                                           v-validate="'required'"
+                                           data-vv-scope="step1"
+                                           :class="errors.has('step1.phone') ? 'error' : ''"
+                                    >
+                                    <div class="validation-error" v-if="errors.has('step1.phone')">
+                                        <span>{{ errors.first('step1.phone') }} <i class="fa fa-times"></i></span>
+                                    </div>
+                                </div>
+                           
+                            <div v-show="!avatarPreview.image" class="form-group upload-container">
+                                <div class="upload-btn-wrapper">
+                                    <a href="javascript:void(0);" class="btn"><img src="/img/upload.png"></a>
+                                    <input type="file"
+                                           aria-describedby="avatar"
+                                           name="avatar"
+                                           v-validate="'required'"
+                                           data-vv-scope="step1"
+                                           ref="avatarDriver"
+                                           @change="handleAvatarDriver"
+                                    >
+                                </div>
+                                <div class="upload-title">
+                                    <span class="upload-heading">Upload Picture</span>
+                                    <span class="sign-up">Choose File <i class="fa fa-chevron-right"></i></span>
+                                </div>
+                            </div>
+                            <div v-if="avatarPreview.image" class="preview-file-wrapper">
+                                <div class="image-wrapper" :style="'background-image: url(' + avatarPreview.image + ')'"></div>
+                                <div class="content-wrapper">
+                                    Avatar
+                                </div>
+                                <div class="delete-wrapper">
+                                    <a @click="removeAvatar" href="javascript:void(0);"><span>Remove <i class="fa fa-times"></i></span></a>
+                                </div>
+                            </div>
+                            <span class="has-error" v-if="errors.has('step1.avatar')">{{ errors.first('step1.avatar') }}</span>
+
+                            <label>Already a member <a @click="signIn()" href="javascript:void(0)" class="sign-up signControl">Sign In Now</a> </label>
+                            <a @click="driverNextStep"  href="javascript:void(0)" class="btn btn--secondary btn--secondary--fill btn--full btn--detached">Continue <i class="fa fa-chevron-right"></i></a>
+                        </div>
+                        <div v-show="driverFormStep === 2">
+                            <div class="form-group validation">
+                                <select class="form-control" id=""
+                                        v-model="driverForm.vehicle"
+                                        name="vehicle"
+                                        v-validate="'required'"
+                                        data-vv-scope="step2"
+                                        :class="errors.has('step2.vehicle') ? 'error' : ''"
+                                >
+                                    <option value="">Vehicle Type</option>
+                                    <option value="minivan">Minivan</option>
+                                    <option value="bicycle">Bicycle</option>
+                                    <option value="moped">Moped</option>
+                                </select>
+                                <div class="validation-error" v-if="errors.has('step2.vehicle')">
+                                    <span>{{ errors.first('step2.vehicle') }} <i class="fa fa-times"></i></span>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group upload-container">
+                                <div class="upload-btn-wrapper">
+                                    <a href="javascript:void(0);" class="btn"><img src="/img/upload.png"></a>
+                                    <input type="file"
+                                           id="driver-vehicle"
+                                           name="vehicle_photos[]"
+                                           v-validate="'required'"
+                                           multiple
+                                           data-vv-scope="step2"
+                                           ref="vehicle"
+                                           @change="handleVehiclePhotos"
+                                    >
+                                </div>
+                                <div class="upload-title">
+                                    <span class="upload-heading">Vehicle Photo</span>
+                                    <span class="sign-up">Choose File <i class="fa fa-chevron-right"></i></span>
+                                </div>
+                            </div>
+                            <div v-if="vehiclePhotos && vehiclePhotos.length > 0" v-for="(photo, index) in vehiclePhotos" :key="index" class="preview-file-wrapper">
+                                <div class="image-wrapper" :style="'background-image: url(' + photo.image + ')'"></div>
+                                <div class="content-wrapper">
+                                    Vehicle
+                                </div>
+                                <div class="delete-wrapper">
+                                    <a @click="removeVehicle(photo, index)" href="javascript:void(0);"><span>Remove <i class="fa fa-times"></i></span></a>
+                                </div>
+                            </div>
+                            <span class="has-error" v-if="errors.has('step2.vehicle_photos[]')">You have to upload at least one vehicle photo.</span>
+
+                            <label>Already a member <a @click="signIn()" href="javascript:void(0)" class="sign-up signControl">Sign In Now</a> </label>
+                            <button  type="submit" class="btn btn--primary btn--primary--fill btn--full btn--detached">REGISTER</button>
+                        </div>
+                    </div>
+                </form>
+
+                </div> -->
+                <!--PET DRIVER SIGNUP END-->
+
+                <!--PET OWNER SIGN UP-->
+                <!-- <div v-show="isVisibleOwner && !signInFormActive" class="sign-wrapper">
+                    <h3>Become Part of the Pet Travel Family!</h3>
+                    <h4 class="subtitle--secondary">Register</h4>
+
+                    <form id="formOwnerReg" method="POST" enctype="multipart/form-data" data-vv-scope="formOwnerReg" v-on:submit.prevent="validateForm('formOwnerReg')"  :action="ownerRegistrationEndpoint">
+
+                        <input type="hidden" name="_token" :value="csrfToken">
+                        <div class="form-group owner-form">
+                            <div class="validation">
+                                <input type="text" class="form-control border-radius-top" aria-describedby="name" placeholder="Name"
+                                       name="name"
+                                       v-validate="'required'"
+                                       :class="errors.has('formOwnerReg.name') ? 'error' : ''"
+                                >
+                                <div class="validation-error" v-if="errors.has('formOwnerReg.name')">
+                                    <span>{{ errors.first('formOwnerReg.name') }} <i class="fa fa-times"></i></span>
+                                </div>
+                            </div>
+                            <div class="validation">
+                                <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Email"
+                                       name="email"
+                                       v-validate="'required|email'"
+                                       :class="errors.has('formOwnerReg.email') ? 'error' : ''"
+                                >
+                                <div class="validation-error" v-if="errors.has('formOwnerReg.email')">
+                                    <span>{{ errors.first('formOwnerReg.email') }} <i class="fa fa-times"></i></span>
+                                </div>
+                            </div>
+                            <div class="validation">
+                                <input type="password" class="form-control" aria-describedby="password" placeholder="Password"
+                                       ref="password"
+                                       name="password"
+                                       v-validate="'required'"
+                                       :class="errors.has('formOwnerReg.password') ? 'error' : ''"
+                                >
+                                <div class="validation-error" v-if="errors.has('formOwnerReg.password')">
+                                    <span>{{ errors.first('formOwnerReg.password') }} <i class="fa fa-times"></i></span>
+                                </div>
+                            </div>
+                            <div class="validation">
+                                <input type="password" class="form-control border-radius-bottom" aria-describedby="password" placeholder="Retype Password"
+                                       name="password_confirmation"
+                                       data-vv-as="password confirmation"
+                                       v-validate="'required'"
+                                       :class="errors.has('formOwnerReg.password_confirmation') ? 'error' : ''"
+                                >
+                                <div class="validation-error" v-if="errors.has('formOwnerReg.password_confirmation')">
+                                    <span>Required <i class="fa fa-times"></i></span>
+                                </div>
+                                </div>
+                        </div>
+
+                        <div v-show="!avatarPreview.image" class="form-group upload-container">
+                            <div class="upload-btn-wrapper sign-up-upload">
+                                <a href="javascript:void(0);" class="btn"><img src="/img/upload.png"></a>
+                                <input type="file"
+                                       aria-describedby="avatar"
+                                       name="avatar"
+                                       v-validate="'required'"
+                                       ref="avatar"
+                                       @change="handleAvatar"
+                                >
+                            </div>
+                            <div class="upload-title">
+                                <span class="upload-heading">Upload Picture</span>
+                                <span class="sign-up">Choose File <i class="fa fa-chevron-right"></i></span>
+                            </div>
+                        </div>
+                        <div v-if="avatarPreview.image" class="preview-file-wrapper">
+                            <div class="image-wrapper" :style="'background-image: url(' + avatarPreview.image + ')'"></div>
+                            <div class="content-wrapper">
+                                Avatar
+                            </div>
+                            <div class="delete-wrapper">
+                                <a @click="removeAvatar" href="javascript:void(0);"><span>Remove <i class="fa fa-times"></i></span></a>
+                            </div>
+                        </div>
+                        <span class="has-error" v-if="errors.has('formOwnerReg.avatar')">{{ errors.first('formOwnerReg.avatar') }}</span>
+
+                        <p><input type="checkbox" name="terms"
+                                  data-vv-as="terms"
+                                  v-validate="'required'"
+                                  :class="errors.has('formOwnerReg.terms') ? 'error' : ''"
+                        > I accept the <u>Terms and Conditions</u></p>
+                        <span class="has-error" v-if="errors.has('formOwnerReg.terms')">{{ errors.first('formOwnerReg.terms') }}</span>
+                        <button  type="submit" class="btn btn--primary btn--primary--fill btn--full btn--detached">REGISTER</button>
+                        <label>Already a member? <a href="javascript:void(0)" @click="signIn()" class="sign-up">Sign In</a> </label>
+
+                    </form>
+
+                </div> -->
+                <!--PET OWNER SIGN UP END-->
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>

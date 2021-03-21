@@ -1,0 +1,62 @@
+.services{
+    margin: 100px 0 100px 0;
+
+    &__title{
+        color: $color-gray-dark;
+        margin-bottom: 50px;
+    }
+}
+.service{
+    @include boxShadow();
+    padding: 20px;
+    border-radius: 5px;
+    height: 100%;
+    &__image{
+        display: block;
+        margin-bottom: 15px;
+    }
+    &__title{
+        color: $color-secondary;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+    &__description{
+        color: $color-gray-dark;
+    }
+}
+
+@media screen and (max-width: $max-tablet){
+    .services{
+        margin: 50px 0 50px 0;
+    }
+}
+
+@media only screen and (max-width: 425px){
+    .about-us-banner{
+        height: 500px;
+        .banner__background{
+            img{
+                display: none;
+            }
+        }
+        .banner__content{
+            margin-top: -200px;
+            color: black;
+        }
+    }
+}
+@media only screen and (max-width: 768px){
+    .services{
+        margin-top: 100px;
+    }
+}
+@media only screen and (max-width: 320px){
+    .about-us-banner{
+        height: 600px;
+
+        .banner__content{
+            margin-top: -290px;
+            color: black;
+        }
+    }
+}

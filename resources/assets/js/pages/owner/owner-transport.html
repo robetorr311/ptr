@@ -1,0 +1,265 @@
+<div>
+    <div v-show="view === 'details'" class="main-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb">
+                        <a href="javascript:history.go(-1)"><i class="fa fa-chevron-left"></i>Back</a>
+                    </div>
+                </div>
+                <section class="col-12">
+                    <div class="breadcrumb-wrapper">
+                        <div class="transport-title-wrapper">
+                            <div class="transport-title">Transportation #{{ transportDetails.id }}</div>
+                            <div class="transport-status">
+                                <span class="status">STATUS:<b>{{ transportDetails.status.toUpperCase() }}</b></span>
+                            </div>
+
+                            <div class="transportation-edit">
+                                <div style="top:0; right: 0; position:absolute;" class="nav-button hide-for-mobile">
+                                </div>
+                            </div>
+                            <div class="transport-button" style="display:inline-flex">
+                                <a @click="openView('rating')" v-if="transportDetails.status === 'in-progress'" href="javascript:void(0)" class="btn btn--full btn--secondary btn--secondary--fill" style="margin-right: 10px;">
+                                    <img src="/img/hammer-transparent.png">
+                                    Finish Transport
+                                </a>
+                                
+                                    <a @click="showPayoutCode" v-show="transportDetails.status === 'completed' && transportDetails.status !== 'cashed'" href="javascript:void(0)" class="btn btn--full btn--secondary btn--secondary--fill">
+                                        <img src="/img/hammer-transparent.png">
+                                        Show Payout Code
+                                    </a>
+                                <a v-show="transportDetails.status === 'open'" :href="'/owner/transports/' + transportDetails.id + '/edit'" class="btn btn--primary btn--primary--fill">
+                                    <span style="color:white;">Edit Transportation </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="col-12">
+                    <div class="bid-box">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="bid-detail">
+                                    <span class="bid-detail__heading">Actual Price</span>
+                                    <span class="bid-detail__info line">${{ transportDetails.budget }}</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="bid-detail">
+                                    <span class="bid-detail__heading">Leading Bid</span>
+                                    <span class="bid-detail__info line">${{ leadingBid }}</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="bid-detail">
+                                    <span class="bid-detail__heading">Closes on</span>
+                                    <span class="bid-detail__info line">{{ transportDetails.departure_date_format.full }}</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="bid-detail current-bid">
+                                    <span class="bid-detail__heading">Current Bid Count</span>
+                                    <img style="width: 30px;" src="/img/hammer-transparent.png" alt="">
+                                    <span class="bids-amount">{{ bids.length }} BIDS</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="col-12 bidding-list-wrapper">
+                    <div class="row">
+                            <div class="col-lg-12">
+                                <div class="row row-border-bottom">
+                                    <div class="col-md-12">
+                                        <div class="form-group form-inline">
+                                            <h4 class="lg-item-head">Bidding List</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul class="list-group">
+
+                                    <p v-if="bids && bids.length < 1">There are no bids yet...</p>
+                                    <li v-for="bid in bids" :key="bid.id" class="list-group-item lg-item ">
+                                        <div class="row bidding-item bid-row">
+                                            <div class="col-md-2 col-md-offset-1 bid-avatar">
+                                                <a :href="'/driver-profile/' + bid.user.id">
+                                                    <div class="avatar-placeholder" :style="'background-image: url(' + bid.user.avatar + ')'"></div>
+                                                </a>
+                                            </div>
+                                            <div class="col-md-2 align-middle bid-user-info">
+                                                <h4 class="name">{{ bid.user.name }}</h4>
+                                                <p class="gray"><span class="fa fa-car checked"></span> &nbsp; {{ bid.user.driver_details.vehicle_type }}</p>
+                                            </div>
+                                            <div class="col-md-2 bid-price">
+                                                <h4 class="price">${{ bid.amount }}</h4>
+                                            </div>
+                                            <div class="col-md-2 bid-button">
+                                                <button class="btn pth-button" v-if="transportDetails.status === 'open' || transportDetails.status === 'awaiting'" @click="checkout($event, bid)">ACCEPT NOW</button>
+                                                <button disabled class="btn pth-button" v-show="bid.status === 'accepted'">Accepted</button>
+                                            </div>
+                                            <div class="col-md-2 bid-button">
+                                                <a @click="showDriverData(bid)" v-if="bid.status === 'accepted'" v-show="transportDetails.status === 'completed' || transportDetails.status === 'in-progress' || transportDetails.status === 'cashed'" class="btn btn--full btn--secondary btn--secondary--fill" style="margin-right:10px;color:white;">
+                                                    Driver Info
+                                                </a>
+                                            </div>
+                                            <div class="col-md-2 bid-button">
+                                                <button style="background-color:darkred; border-color:darkred;" class="btn pth-button" v-if="transportDetails.status === 'open' || transportDetails.status === 'awaiting'" @click="reject($event, bid)">DECLINE</button>
+                                                <button disabled class="btn pth-button" v-show="bid.status === 'declined'">Declined</button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div v-if="moreBids" class="col-lg-12 centered-content">
+                                <a href="javascript:void(0);" @click="loadBids" class="custom-link"> <span class="number-left">{{ transport.bids.length - bids.length }}</span> <br /> More Bids to See <br /> <i class="fa fa-chevron-down"></i> </a>
+                            </div>
+                    </div>
+                </section>
+                <hr>
+                <section class="col-12">
+                    <div class="transport-location">
+                        <div class="row">
+                            <div  data-aos="zoom-in-up" class="col-12 col-lg-6">
+                                <h3 class="section-title">Origin & Destination Point</h3>
+                                <div class="form-group">
+                                    <label for="origin">From</label>
+                                    <input type="email" class="form-control" id="origin" :placeholder="transportDetails.departure_address" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="origin">To</label>
+                                    <input type="email" class="form-control"  :placeholder="transportDetails.destination_address" disabled>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <div id="map" class="transport-detail-map"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <hr>
+            </div>
+        </div>
+        <div class="green-bg-wrapper">
+            <div class="container">
+                <section class="col-12">
+                    <div class="row">
+                        <div class="col-12 col-lg-6">
+                            <h3 data-aos="fade-left" class="orange">Pets To Be Transported</h3>
+                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="false" data-interval="false">
+                                <ol class="carousel-indicators">
+                                    <li data-target="#carouselExampleIndicators"
+                                        v-for="(pet, index) in pets" :key="pet.id"
+                                        :data-slide-to="index"
+                                        :class="index === 0 ? 'active' : ''"
+                                    ></li>
+                                </ol>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item" v-for="(pet, index) in pets" :key="pet.id"
+                                         :class="index === 0 ? 'active' : ''"
+                                    >
+                                        <div class="pet-overview">
+                                            <div class="avatar" style="width:100px;height:100px;">
+                                                <div class="avatar-image" style="height:95px;width:95px;">
+                                                </div>
+                                            </div>
+                                            <div class="pet-overview--name">
+                                                {{ pet.name }}
+                                            </div>
+                                            <div class="divider"></div>
+                                            <div class="pet-overview--details">
+                                                <span class="key">Type</span>
+                                                <span class="value">{{ pet.type }}</span>
+                                                <span class="key">Weight</span>
+                                                <span class="value">{{ pet.weight }} lbs</span>
+                                                <span class="key">Size</span>
+                                                <span class="value">{{ pet.size }}</span>
+                                            </div>
+                                            <div class="pet-overview--special">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                    <i class="fa fa-chevron-left"></i>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                    <i class="fa fa-chevron-right"></i>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 transport-dates-wrapper">
+                            <div  data-aos="fade-right" class="transport-dates">
+                                <div class="before">
+                                    <label>{{ transportDetails.departure_type }}</label>
+                                    <span class="transport-dates__day">{{ transportDetails.departure_date_format.day }}</span>
+                                    <span class="transport-dates__mmyy">{{ transportDetails.departure_date_format.month }}, {{ transportDetails.departure_date_format.year }}</span>
+                                </div>
+                                <div  data-aos="fade-left" class="after">
+                                    <label>{{ transportDetails.arrival_type }}</label>
+                                    <span class="transport-dates__day">{{ transportDetails.arrival_date_format.day }}</span>
+                                    <span class="transport-dates__mmyy">{{ transportDetails.arrival_date_format.month }}, {{ transportDetails.arrival_date_format.year }}</span>
+                                </div>
+                                <i class="fa fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <section class="col-12">
+                    <div class="row">
+                        <div data-aos="zoom-in" class="col-12 col-lg-12 green-comment-wrapper">
+                            <h3  data-aos="fade-right">Questions About Transport</h3>
+                            <div data-aos="fade-right" class="comment">
+                                <div class="comment-user">
+                                    <div class="avatar">
+                                        <img :src="user.avatar" alt="avatar">
+                                    </div>
+                                    <div class="comment-user__name">
+                                        {{ user.name }}
+                                    </div>
+                                </div>
+                                <div class="comment__text new-comment">
+                                    <textarea v-model="newComment" @keyup="submitComment" placeholder="Additional questions for transport..." class="form-control" rows="3"></textarea>
+                                    <a href="javascript:void(0)" @click="submitCommentClick" class="btn btn-primary btn--primary--fill" style="border-color:transparent;">Send</a>
+                                </div>
+                            </div>
+
+                            <div v-if="comments" v-for="comment in comments" :key="comment.id" data-aos="fade-right" class="comment">
+                                <div class="comment-user">
+                                    <div class="avatar">
+                                        <img :src="comment.user.avatar" alt="avatar">
+                                    </div>
+                                    <div class="comment-user__name">
+                                        {{ comment.user.name }}
+                                    </div>
+                                    <!--<a href="#" class="report-comment">report comment</a>-->
+                                </div>
+                                <div class="comment__text">
+                                    <!--<span>May I send personal belongings with my pet?</span>-->
+                                    <p>{{ comment.content }}</p>
+                                    <div class="comment__text--time">
+                                        {{ comment.created_at }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a v-if="moreQuestions" data-aos="fade-right" class="view-more-questions" href="javascript:void(0);" @click="loadComments">View More Questions <i class="fa fa-chevron-down"></i></a>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div v-show="view === 'rating'">
+        <profile-review v-on:completed="completedTransport" :bid="acceptedBid"></profile-review>
+    </div>
+</div>

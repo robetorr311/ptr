@@ -1,0 +1,83 @@
+.add-pet-modal {
+  h4 {
+    font-size: 1.1rem;
+    font-weight: normal;
+  }
+  form {
+    padding: 5%;
+  }
+  .orange {
+    color: #f18519;
+  }
+  .green-border {
+    border: solid 1px #047f03;
+  }
+  .label-text {
+    color: #495057;
+  }
+  .custom-fill {
+    background-color: #047f03;
+    color: white;
+  }
+  .form-control:focus {
+    box-shadow: none;
+    border-color: #047f03;
+  }
+  .custom-gray-fill {
+    background-color: #f9f9f9;
+  }
+  .upload-btn-wrapper {
+    top: 20px;
+    position: relative;
+    border: solid 1px #047f03;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .pet-avatar {
+      width: 100px;
+      height: 100px;
+      /* fill the container, preserving aspect ratio, and cropping to fit */
+      background-size: cover;
+
+      /* center the image vertically and horizontally */
+      background-position: top center;
+
+      /* round the edges to a circle with border radius 1/2 container size */
+      border-radius: 50%;
+      border: 1px solid $color-gray-light;
+
+      background-image: url("/img/pet_avatar.png");
+    }
+  }
+  .add-pic-btn {
+    color: white;
+    background-color: #047f03;
+    border-color: #047f03;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border-style: solid;
+    font-size: 20px;
+    margin-left: 14px;
+    margin-top: 14px;
+  }
+
+  .upload-btn-wrapper input[type=file] {
+    top: 0;
+    width: 100%;
+    font-size: 80px;
+    position: absolute;
+    opacity: 0;
+  }
+  .add-pet-inline {
+    margin-bottom: 20px;
+  }
+}
+@media only screen and (max-width: 425px) {
+  .upload-btn-wrapper{
+    margin-bottom: 35px;
+  }
+}

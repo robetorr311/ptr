@@ -1,0 +1,323 @@
+<div>
+
+    <div class="main-content">
+        <div class="container">
+            <div class="row profile">
+                <!--BREADCRUMB-->
+                <div class="col-12">
+                    <div class="breadcrumb">
+                        <a href="javascript:history.go(-1)"><i class="fa fa-chevron-left"></i>Back</a>
+                    </div>
+                </div>
+
+
+                <div class="col-12 col-lg-6">
+                    <!--PROFILE BOX-->
+
+                    <div class="profile-box">
+                        <div class="row">
+
+                            <div class="col-5">
+                                <div class="avatar" :style="'background-image:url(' + user.avatar + ')'">
+                                </div>
+                            </div>
+                            <div class="col-7">
+                                <div class="details profile-details">
+                                    <div class="name">{{ user.name }}</div>
+                                    <div class="role">Pet Driver</div>
+                                    <div class="details__line">
+                                        <i class="fa fa-phone"></i>
+                                        <span>{{ user.phone }}</span>
+                                    </div>
+                                    <div class="details__line">
+                                        <i class="fa fa-envelope"></i>
+                                        <span>{{ user.email }}</span>
+                                    </div>
+                                    <div class="details__line">
+                                        <i class="fa fa-car"></i>
+                                        <span>{{ user.driver_details.vehicle_type }}</span>
+                                    </div>
+                                </div>
+                                <div class="actions">
+                                    <!--<a href="javascript:void(0)" class="btn btn&#45;&#45;detached btn&#45;&#45;primary btn&#45;&#45;primary&#45;&#45;fill">SEARCH BIDDINGS</a>-->
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+                </div>
+                <div class="col-12 col-lg-6 clearfix">
+                    <div id="review-box" class="review-box bg">
+                        <div class="rating-column overall" v-show="user.reviewOverall && user.reviewOverall.length > 0">
+                            <label>{{ user.reviewOverall.overall }}</label>
+                            <div class="stars">
+                                <star-rating :rating="user.reviewOverall.overall" :read-only="true" :increment="0.5" :star-size="20" :show-rating="false" inactive-color="#fff"></star-rating>
+                            </div>
+                        </div>
+                        <div class="rating-column">
+                            <label>Vehicle Condition</label>
+                            <label>{{ user.reviewOverall.vehicle }}</label>
+                        </div>
+                        <div class="rating-column">
+                            <label>Communication Skills</label>
+                            <label>{{ user.reviewOverall.communication }}</label>
+                        </div>
+                        <div class="rating-column">
+                            <label>Driver Punctuality</label>
+                            <label>{{ user.reviewOverall.driver }}</label>
+                        </div>
+                        <div v-show="user.reviewOverall && user.reviewOverall.length > 0">
+                            Not rated yet.
+                        </div>
+                    </div>
+
+
+                </div>
+                <hr>
+                <div class="col-12 col-lg-12">
+                    <h3  class="section-title">My Transports</h3>
+                    <!--TRANSPORT OVERVIEW-->
+                    <div v-if="transports && transports.length > 0" v-for="transport in transports" :key="transport.id" class="transport">
+                        <div class="location">
+                            <div class="avatar-uni" :style="'background-image:url(' + transport.owner.avatar + ')'"></div>
+                            <div class="address">
+                                <span>{{ transport.departure_address }}</span>
+                            </div>
+                            <div>
+                                <i class="fa fa-chevron-down"></i>
+                            </div>
+                            <div class="address">
+                                <span>{{ transport.destination_address }}</span>
+                            </div>
+                        </div>
+                        <div class="date-from-to">
+                            <div class="from">
+                                <span class="date-title">{{ transport.departure_type }}</span>
+                                <span class="date-day">{{ transport.departure_date_format.day }}</span>
+                                <span class="date-rest">{{ transport.departure_date_format.month }}, {{ transport.departure_date_format.year }}</span>
+                            </div>
+                            <div class="to">
+                                <span class="date-title">{{ transport.arrival_type }}</span>
+                                <span class="date-day">{{ transport.arrival_date_format.day }}</span>
+                                <span class="date-rest">{{ transport.arrival_date_format.month }}, {{ transport.arrival_date_format.year }}</span>
+                            </div>
+                        </div>
+                        <div class="pet-details">
+                            <div class="plural" v-if="transport.pets.length > 1">
+                                <div><span>{{ transport.pets.length }}</span></div>
+                                <div>Pets</div>
+                            </div>
+                            <div v-else>
+                                <div class="atr-names">
+                                    <span>Type</span>
+                                    <span>Weight</span>
+                                    <span>Size</span>
+                                </div>
+                                <div class="atr-values">
+                                    <span>{{ transport.pets[0].type }}</span>
+                                    <span>{{ transport.pets[0].weight }} kg</span>
+                                    <span>{{ transport.pets[0].size }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="details">
+                            <div class="details__status">
+                                <label for="">Status</label>
+                                <span class="warning">{{ transport.status.toUpperCase() }}</span>
+                            </div>
+                            <div class="details__bid">
+                                <div v-if="transport.bids && transport.bids.length > 0">
+                                    <label for="">Latest Bid</label>
+                                    <span class="amount">{{ transport.bids[0].amount }}<sup>$</sup></span>
+                                </div>
+                                <div v-else>
+                                    <label for="">No Bids Yet</label>
+                                </div>
+                            </div>
+                            <div class="details__link">
+                                <!--<a href="#" class="btn btn&#45;&#45;secondary btn&#45;&#45;secondary&#45;&#45;fill">BID NOW</a>-->
+                                <!--<a :href="transportDetails(transport.id)" class="btn btn&#45;&#45;primary btn&#45;&#45;primary&#45;&#45;fill full-width">Details</a>-->
+                                <!--<a :href="transportDetails(transport.id)" class="btn-right"> <i class="fa fa-chevron-right"></i> </a>-->
+                            </div>
+                        </div>
+                    </div>
+                    <!--END-->
+
+
+                    <!--<a href="#" class="btn btn&#45;&#45;plain btn&#45;&#45;plain&#45;&#45;transparent btn&#45;&#45;full btn-load-more">-->
+                    <!--<span class="big-green-text">235</span>-->
+                    <!--<span>More Transports to See</span>-->
+                    <!--<i class="fa fa-chevron-down"></i>-->
+                    <!--</a>-->
+
+
+
+                </div>
+
+
+                <!--<div class="col-12 col-lg-12 clearfix">-->
+                    <!--<h3 class="section-title">My Transactions</h3>-->
+                    <!--&lt;!&ndash;TRANSACTION OVERVIEW&ndash;&gt;-->
+                    <!--<div class="transaction-overview">-->
+                        <!--<div class="details">-->
+                            <!--<div class="details__bid">-->
+                                <!--<span>Payment</span>-->
+                                <!--<span class="amount">300.00<sup>$</sup></span>-->
+                                <!--<span class="warning">pending</span>-->
+                            <!--</div>-->
+                            <!--<div class="person">-->
+                                <!--<label for="">To:</label>-->
+                                <!--<div class="avatar">-->
+                                    <!--<img src="img/avatar.png" alt="avatar">-->
+                                <!--</div>-->
+                                <!--<label for="">Name LastName</label>-->
+                            <!--</div>-->
+                            <!--<div class="details__link">-->
+                                <!--<a href="#">Details <i class="fa fa-chevron-right"></i> </a>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<div class="transaction-overview">-->
+                        <!--<div class="details">-->
+                            <!--<div class="details__bid">-->
+                                <!--<span>Payment</span>-->
+                                <!--<span class="amount">300.00<sup>$</sup></span>-->
+                                <!--<span class="danger">pending</span>-->
+                            <!--</div>-->
+                            <!--<div class="person">-->
+                                <!--<label for="">To:</label>-->
+                                <!--<div class="avatar">-->
+                                    <!--<img src="img/avatar.png" alt="avatar">-->
+                                <!--</div>-->
+                                <!--<label for="">Name LastName</label>-->
+                            <!--</div>-->
+                            <!--<div class="details__link">-->
+                                <!--<a href="#">Details <i class="fa fa-chevron-right"></i> </a>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="transaction-overview">-->
+                        <!--<div class="details">-->
+                            <!--<div class="details__bid">-->
+                                <!--<span>Payment</span>-->
+                                <!--<span class="amount">300.00<sup>$</sup></span>-->
+                                <!--<span class="danger">pending</span>-->
+                            <!--</div>-->
+                            <!--<div class="person">-->
+                                <!--<label for="">To:</label>-->
+                                <!--<div class="avatar">-->
+                                    <!--<img src="img/avatar.png" alt="avatar">-->
+                                <!--</div>-->
+                                <!--<label for="">Name LastName</label>-->
+                            <!--</div>-->
+                            <!--<div class="details__link">-->
+                                <!--<a href="#">Details <i class="fa fa-chevron-right"></i> </a>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<a href="#" class="btn btn&#45;&#45;plain btn&#45;&#45;plain&#45;&#45;transparent btn&#45;&#45;full btn-load-more transaction-load-more">-->
+                        <!--<span class="big-green-text">7</span>-->
+                        <!--<span>More Transactions</span>-->
+                        <!--<i class="fa fa-chevron-down"></i>-->
+                    <!--</a>-->
+
+
+
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--Update Profile Modal-->
+    <!-- Modal -->
+    <div class="modal fade" id="profileModal" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="profileModalLabel">Update Profile</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div v-if="user" class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" class="form-control" id="name" name="name" v-model="user.name">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="text" class="form-control" id="phone" name="phone" v-model="user.phone">
+                    </div>
+                    <div class="form-group ">
+                        <div class="upload box">
+                            <!--<input type="browse" style="display: none;">-->
+                            <!--<a href="#" class="uploadPhoto">-->
+                            <!--<span class="icon">-->
+                            <!--<i class="fa fa-cloud-upload"></i>-->
+                            <!--</span>-->
+                            <!--<span class="upload-title"></span>-->
+                            <!--<h4 class="subtitle&#45;&#45;secondary">Choose File <i class="fa fa-chevron-right"></i> </h4>-->
+                            <!--</a>-->
+                            <h4>Upload Avatar</h4>
+
+                            <input type="file" class="form-control" aria-describedby="avatar" placeholder="Avatar"
+                                   id="uploaded-avatar"
+                                   name="avatar"
+                                   @change="fileUploaded"
+                            >
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" id=""
+                                v-model="vehicle.type"
+                                name="vehicle"
+                        >
+                            <option value="">Vehicle Type</option>
+                            <option value="minivan">Minivan</option>
+                            <option value="bicycle">Bicycle</option>
+                            <option value="moped">Moped</option>
+                        </select>
+                    </div>
+
+                    <!--Vehicle pictures-->
+                    <div class="form-group">
+                        <div class="upload-box">
+                            <h4>Vehicle Photos</h4>
+                            <input type="file" class="form-control" aria-describedby="vehicle" placeholder="Vehicle photos"
+                                   id="driver-vehicle"
+                                   name="vehicle_photos[]"
+                                   multiple
+                                   @change="vehicleUploaded"
+                            >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <a @click="changePassword = !changePassword" href="javascript:void(0)" type="button" class="btn btn--plain btn--plain--transparent">{{ changePasswordText }}</a>
+                    </div>
+                    <div class="form-group">
+                        <label for="old_password">Old Password</label>
+                        <input :disabled="changePassword" type="password" class="form-control" id="old_password" name="old_password" v-model="user.old_password">
+                    </div>
+                    <div class="form-group">
+                        <label for="new_password">New Password</label>
+                        <input :disabled="changePassword" type="password" class="form-control" id="new_password" name="new_password" v-model="user.new_password">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn--detached btn--primary btn--primary--fill" data-dismiss="modal">Close</button>
+                    <button @click="submitProfile" type="button" class="btn btn--detached btn--secondary btn--secondary--fill">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

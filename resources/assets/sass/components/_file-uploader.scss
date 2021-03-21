@@ -1,0 +1,74 @@
+
+.uploader-action{
+  padding: 20px;
+  background: #f1f5ff;
+  cursor: pointer;
+  transition: background .3s ease;
+  border: 1px dashed rgba(128, 128, 128, .6);
+  border-radius: 5px;
+}
+.uploader-action.dragging{
+  background: #fff;
+}
+
+.uploader-file{
+  max-height:110px;
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid $color-gray-dark;
+  border-radius: 5px;
+  margin: 10px 0;
+  justify-content: space-between;
+  overflow: hidden;
+  .avatar-wrapper{
+    border: 2px solid $color-gray-dark;
+    border-radius: 50%;
+    padding: 3px;
+    .file-avatar{
+      /* make a square container */
+      width: 80px;
+      height: 80px;
+
+
+
+      /* fill the container, preserving aspect ratio, and cropping to fit */
+      background-size: cover;
+
+      /* center the image vertically and horizontally */
+      background-position: top center;
+
+      /* round the edges to a circle with border radius 1/2 container size */
+      border-radius: 50%;
+    }
+  }
+  .file-details{
+    padding: 20px 0;
+    width:150px; // some width
+    .file-name{
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    @media only screen and (max-width: 425px){
+      display: none;
+    }
+  }
+  .remove-image{
+    width: 130px;
+    padding: 20px;
+    background: $green-primary;
+    border-radius: 50% 0 0 50%;
+    transform: scale(1.5);
+    a{
+      color: $color-white;
+      position: absolute;
+      top: 43px;
+      font-size: 12px;
+    }
+  }
+}
+.upload{
+  h4{
+    font-size: 18px;
+  }
+}

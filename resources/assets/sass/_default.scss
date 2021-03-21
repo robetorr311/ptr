@@ -1,0 +1,146 @@
+html, body, p, span, label, h1, h2, h3, h4, h5, h6{
+    color: $color-gray-dark;
+}
+body {
+    font-family: 'Baloo Bhaina', Times, serif;
+}
+.page-title{
+    margin: 20px 0 40px 0;
+}
+.danger{
+    color: $color-danger;
+}
+.warning{
+    color: $color-warning;
+}
+.success{
+    color: $color-success;
+}
+.is-marginless{
+    margin: 0 !important;
+}
+.is-paddingless{
+    margin: 0 !important;
+}
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+.white {
+    color: $color-white !important;
+}
+.margin-bottom-20{
+    margin-bottom: 20px;
+}
+.padding-10{
+    padding: 10px;
+}
+.no-margin-bottom{
+    margin-bottom: 0 !important;
+}
+
+.error {
+    border-color: red !important;
+}
+
+span {
+    &.has-error {
+        color: red;
+        font-size: 12px;
+    }
+}
+
+p{
+    &.flash {
+        text-align: center;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 20px;
+        color: $green-primary;
+        @include boxShadowWithColor($green-primary)
+    }
+    &.flash-error {
+        text-align: center;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 20px;
+        color: $color-danger;
+        @include boxShadowWithColor($color-danger)
+    }
+}
+.clickable {
+    &:hover{
+        cursor: pointer;
+        @include boxShadowWithColor($green-primary);
+    }
+}
+.clickable-raw{
+    &:hover {
+        cursor: pointer;
+    }
+}
+.vertical-middle > div, .vertical-middle > span, .vertical-middle > p {
+    @include vertical-align();
+}
+button{
+    &:disabled {
+        cursor: not-allowed;
+    }
+}
+.nav-avatar {
+
+    /* make a square container */
+    width: 33px;
+    height: 33px;
+
+    /* fill the container, preserving aspect ratio, and cropping to fit */
+    background-size: cover;
+
+    /* center the image vertically and horizontally */
+    background-position: top center;
+
+    /* round the edges to a circle with border radius 1/2 container size */
+    border-radius: 50%;
+    transition: ease transform .3s;
+    &:hover {
+        transform: scale(1.2);
+        transition: ease transform .3s;
+    }
+}
+#map{
+    border-radius: 10px;
+    @include boxShadow();
+}
+.orange{
+    color: $orange-primary !important;
+}
+p{
+    font-family: 'Open Sans', sans-serif;
+
+}
+input, select, textarea {
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+    font-weight: 300;
+}
+.edit-profile-modal-header{
+    font-family: 'Open-Sans', sans-serif;
+    /* color: white; */
+    background-color: $color-secondary;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    h5{
+        color: $color-white;
+    }
+    button{
+        span{
+            color: $color-white;
+        }
+    }
+}
+a.btn{
+    img{
+        margin-right: 4px;
+    }
+}

@@ -1,0 +1,220 @@
+.breadcrumb-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .breadcrumb-title{
+    width: 50%;
+    min-width: 555px;
+  }
+  .breadcrumb-buttons{
+    width: 48%;
+    padding: 30px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: flex-end;
+    a {
+      height: 41px;
+      width: 45%;
+      img{
+        height: 21px;
+        width: 21px;
+      }
+    }
+  }
+  @media only screen and (max-width: 1024px){
+    .breadcrumb-buttons{
+      width: 100%;
+    }
+  }
+}
+.green-bg-wrapper{
+  background-color: $green-primary;
+  padding: 10px 0;
+  .transport-dates-wrapper{
+    padding-top: 27px;
+    margin-top: 11px;
+    .transport-dates{
+      font-family: 'Open Sans', sans-serif;
+      border-radius: 5px;
+      background-color: $color-white;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      label{
+        color: $color-gray-dark;
+      }
+      .before{
+        border-right: 1px solid rgba(128, 128, 128, .6);
+        span{
+          color: $orange-primary;
+        }
+      }
+      .after{
+        span{
+          color: $green-primary;
+        }
+      }
+      i{
+        color: $color-gray-dark;
+      }
+    }
+  }
+}
+.green-comment-wrapper{
+  background-color: $green-primary;
+  margin-top: 30px;
+  border-radius: 5px;
+  padding: 0;
+  h3{
+    color: $orange-primary;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0 15px;
+  }
+  @include boxShadowWithColor($color-gray-dark);
+  .comment{
+    padding: 0 15px;
+    -webkit-box-shadow: 0px 6px 23px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 6px 23px -5px rgba(0,0,0,0.75);
+    box-shadow: 0px 6px 23px -5px rgba(0,0,0,0.75);
+    &:first-of-type{
+      margin-top: 0;
+    }
+    .new-comment{
+      textarea{
+        color: $color-white;
+        background-color: $green-primary-dark;
+        border: 0;
+        @include placeholderColor($color-white);
+      }
+    }
+    .comment-user{
+      div{
+        color: $color-white;
+      }
+      a{
+        color: $color-white;
+        &:hover{
+          color: $orange-primary;
+        }
+      }
+    }
+    .comment__text{
+      border: 0;
+      span{
+        display: block;
+        color: $orange-primary;
+        font-size: 21px;
+        margin-bottom: 12px;
+      }
+      p{
+        color: $color-white;
+        padding: 0 10px;
+      }
+    }
+  }
+  a.view-more-questions{
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: $orange-primary;
+    font-size: 20px;
+    padding: 5px 0;
+    font-weight: bold;
+    border-radius: 0 5px 5px 0;
+    &:hover{
+      text-decoration: none;
+      color: $orange-primary-lighten;
+    }
+  }
+}
+.pets-pending-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
+  .pets-pending{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    h3{
+      color: $orange-primary;
+      margin-top: 24px;
+      margin-bottom: 36px;
+    }
+  }
+  .pets-bidding{
+    .pets-bidding-buttons{
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      div{
+        height: 50px;
+        width: 48%;
+        a{
+          img{
+            width: 30px;
+            height: 30px;
+          }
+        }
+      }
+    }
+    .bid-info{
+      width: 48%;
+      text-align: center;
+      color: $green-primary;
+    }
+    p{
+      margin-bottom: 0;
+    }
+    span{
+      display: block;
+      color: $green-primary;
+      font-size: 25px;
+      margin-bottom: 10px;
+
+    }
+  }
+}
+.transport-title-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  .transport-title{
+    font-size: 40px;
+    margin-right: 20px;
+  }
+  .transport-status{
+    display: block;
+    margin-right: 140px;
+  }
+  .transport-button{
+    img{
+      height: 26px;
+      width: auto;
+    }
+  }
+}
+@media only screen and (max-width: 768px) {
+  .transport-title-wrapper {
+    .transport-title {
+      font-size: 15px;
+    }
+    .status{
+      font-size: 16px;
+    }
+  }
+}
+@media only screen and (max-width: 425px) {
+  .transport-title-wrapper{
+    div{
+      .status{
+        margin-left: 0;
+      }
+      margin-bottom: 15px;
+    }
+  }
+}

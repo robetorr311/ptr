@@ -1,0 +1,12 @@
+.breadcrumb{
+    background: none;
+    a{
+        @include colorLink($color-gray-dark, $color-gray-dark);
+        font-weight: bold;
+        .fa{
+            margin-right: 10px; 
+            color: inherit;
+            font-weight: bold;
+        }
+    }
+}

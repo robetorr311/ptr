@@ -1,0 +1,398 @@
+<div>
+    <div class="map-full">
+        <div class="location-search-bg"></div>
+        <div class="location-search">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <div class="location-search__input">
+                            <div class="input-group  map-marker">
+                                <!--<div class="input-group-addon"><i class="fa fa-map-marker"></i></div>-->
+                                <input
+                                        class="form-control"
+                                        id="autocomplete"
+                                        placeholder="Enter your location"
+                                        v-model="startAddress"
+                                >
+                                <i class="fa fa-map-marker"></i>
+                                <a href="javascript:void(0)" @click="submit" class="btn btn--primary btn--primary--fill get-location">
+                                    Search Location
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="slider">
+                            <label for="" class="title">search radius</label>
+                            <!-- default props -->
+                            <vue-slider
+                                    v-model="value"
+                                    v-bind="options"
+                            ></vue-slider>
+                            <label>{{ value }}</label><label>km</label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="map-search-wrapper">
+            <div class="search-fields">
+                <h4>ADDITIONAL FILTERS</h4>
+                <hr>
+                <label>Departure And Arrival Date</label>
+                <div class="form-group dates">
+                    <div>
+                        <input type="text"
+                               placeholder="Select date"
+                               class="datepicker form-control"
+                               id="startDate"
+                               name="start_date"
+                               @change="submit"
+                        >
+                        <i class="fa fa-calendar-o"></i>
+                    </div>
+                    <div>
+                        <input type="text"
+                               placeholder="Select date"
+                               class="datepicker form-control"
+                               id="endDate"
+                               name="end_date"
+                               @change="submit"
+                        >
+                        <i class="fa fa-calendar-o"></i>
+                    </div>
+                </div>
+                <hr>
+                <label>Pet Information</label>
+                <div class="form-group">
+                    <select class="form-control"
+                            name="type"
+                            v-model="search.petType"
+                            @change="submit"
+                    >
+                        <option value="">Pet Type</option>
+                        <option value="dog">Dog</option>
+                        <option value="cat">Cat</option>
+                        <option value="fish">Fish</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text"
+                           placeholder="Max size (lbs)"
+                           class="form-control"
+                           id="weight"
+                           name="weight"
+                           v-model="search.petWeight"
+                           @keyup="submit"
+                    >
+                </div>
+                <label>Budget</label>
+                <div class="form-group">
+                    <input type="number"
+                           min="0"
+                           placeholder="Min $"
+                           class="form-control"
+                           id="min_amount"
+                           name="min_amount"
+                           v-model="search.amountMin"
+                           @keyup="submit"
+                    >
+                </div>
+                <div class="form-group">
+                    <input type="number"
+                           min="0"
+                           placeholder="Max $"
+                           class="form-control"
+                           id="max_amount"
+                           name="max_amount"
+                           v-model="search.amountMax"
+                           @keyup="submit"
+                    >
+                </div>
+                <div class="form-group">
+                    <a @click="clearSearch" href="javascript:void(0);" class="btn btn--secondary btn--secondary--fill">Clear Filters <i class="fa fa-times"></i></a>
+                </div>
+            </div>
+            <div id="map"></div>
+        </div>
+
+        <div class="map-transport-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-12">
+                        <h3 v-if="selectedTransport">Selected transport</h3>
+                        <a v-if="selectedTransport" class="transport" :href="'/driver/transport/' + selectedTransport.id">
+                            <div class="location">
+                                <div class="avatar-uni" style="background-image:url('/img/profile.jpg')"></div>
+                                <div class="address">
+                                    <span>{{ selectedTransport.departure_address }}</span>
+                                </div>
+                                <div>
+                                    <i class="fa fa-chevron-down"></i>
+                                </div>
+                                <div class="address">
+                                    <span>{{ selectedTransport.destination_address }}</span>
+                                </div>
+                                <img src="/img/search-pet.png" alt="">
+                            </div>
+                            <div class="date-from-to">
+                                <div class="from">
+                                    <span class="date-title">{{ selectedTransport.departure_type }}</span>
+                                    <span class="date-day">{{ selectedTransport.departure_date_format.day }}</span>
+                                    <span class="date-rest">{{ selectedTransport.departure_date_format.month }}, {{ selectedTransport.departure_date_format.year }}</span>
+                                </div>
+                                <div class="to">
+                                    <span class="date-title">{{ selectedTransport.arrival_type }}</span>
+                                    <span class="date-day">{{ selectedTransport.arrival_date_format.day }}</span>
+                                    <span class="date-rest">{{ selectedTransport.arrival_date_format.month }}, {{ selectedTransport.arrival_date_format.year }}</span>
+                                </div>
+                            </div>
+                            <div class="pet-details">
+                                <div class="plural" v-if="selectedTransport.pets.length > 1">
+                                    <div><span>{{ selectedTransport.pets.length }}</span></div>
+                                    <div>Pets</div>
+                                </div>
+                                <div v-else>
+                                    <div class="atr-names">
+                                        <span>Breed</span>
+                                        <span>Weight</span>
+                                        <span>Size</span>
+                                    </div>
+                                    <div class="atr-values">
+                                        <span>{{ selectedTransport.pets[0].type}}</span>
+                                        <span>{{ selectedTransport.pets[0].weight}} lbs</span>
+                                        <span>{{ selectedTransport.pets[0].size}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details">
+                                <div class="details__status">
+                                    <label for="">Status</label>
+                                    <span class="warning">{{ selectedTransport.status.toUpperCase() }}</span>
+                                </div>
+                                <div class="details__bid">
+                                    <label for="">Budget</label>
+                                    <span class="amount">${{ selectedTransport.budget }}</span>
+                                </div>
+                                <div class="details__link">
+                                    <a style="width: 90%;" v-if="selectedTransport.biddable"  href="javascript:void(0);" @click="openBidModal(selectedTransport.id)"  class="btn btn--secondary btn--secondary--fill">BID NOW</a>
+                                    <a style="width: 90%;" v-if="selectedTransport.first_bid_buy"  href="javascript:void(0);" @click="openBuyModal(selectedTransport.id, selectedTransport.budget)"  class="btn btn--primary btn--primary--fill">ACCEPT PRICE</a>
+                                    <a href="#" class="btn-right"> <i class="fa fa-chevron-right"></i> </a>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="container">
+            <div class="row">
+                <!--<div class="col-12  col-lg-12">-->
+                    <!--<div class="geo-filters">-->
+                        <!--<div class="form-group">-->
+                            <!--<select class="form-control">-->
+                                <!--<option>Bidding System</option>-->
+                                <!--<option>2</option>-->
+                                <!--<option>3</option>-->
+                                <!--<option>4</option>-->
+                                <!--<option>5</option>-->
+                            <!--</select>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<div class="datepicker">-->
+                                <!--<date-picker v-model="time1" :first-day-of-week="1" lang="en"></date-picker>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="button-wrapper">-->
+                            <!--<a v-show="!extraSearchVisible" @click="enableFilters()" href="javascript:void(0)" class="btn btn&#45;&#45;plain btn&#45;&#45;plain&#45;&#45;transparent add-filters">-->
+                                <!--<i class="fa fa-plus-circle"></i>-->
+                                <!--<span>ADDITIONAL FILTERS</span>-->
+                            <!--</a>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <hr>
+                <div class="col-12" id="transport-results">
+                    <h3 class="page-title">Location Based Result</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-lg-12">
+                    <div v-if="transports === null || transports.length === 0">
+                        <h4>No transports found</h4>
+                    </div>
+                    <div v-if="transports" v-for="transport in transportsPart" :key="transport.id" class="transport clickable" @click="selectTransport(transport)">
+                        <div class="location">
+                            <div class="avatar-uni" style="background-image:url('/img/profile.jpg')"></div>
+                            <div class="address">
+                                <span>{{ transport.departure_address }}</span>
+                            </div>
+                            <div>
+                                <i class="fa fa-chevron-down"></i>
+                            </div>
+                            <div class="address">
+                                <span>{{ transport.destination_address }}</span>
+                            </div>
+                            <img src="/img/search-pet.png" alt="">
+                        </div>
+                        <div class="date-from-to">
+                            <div class="from">
+                                <span class="date-title">{{ transport.departure_type }}</span>
+                                <span class="date-day">{{ transport.departure_date_format.day }}</span>
+                                <span class="date-rest">{{ transport.departure_date_format.month }}, {{ transport.departure_date_format.year }}</span>
+                            </div>
+                            <div class="to">
+                                <span class="date-title">{{ transport.arrival_type }}</span>
+                                <span class="date-day">{{ transport.arrival_date_format.day }}</span>
+                                <span class="date-rest">{{ transport.arrival_date_format.month }}, {{ transport.arrival_date_format.year }}</span>
+                            </div>
+                        </div>
+                        <div class="pet-details">
+                            <div class="plural" v-if="transport.pets.length > 1">
+                                <div><span>{{ transport.pets.length }}</span></div>
+                                <div>Pets</div>
+                            </div>
+                            <div v-else>
+                                <div class="atr-names">
+                                    <span>Breed</span>
+                                    <span>Weight</span>
+                                    <span>Size</span>
+                                </div>
+                                <div class="atr-values">
+                                    <span>{{ transport.pets[0].type}}</span>
+                                    <span>{{ transport.pets[0].weight}} lbs</span>
+                                    <span>{{ transport.pets[0].size}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="details">
+                            <div class="details__status">
+                                <label for="">Status</label>
+                                <span class="warning">{{ transport.status.toUpperCase() }}</span>
+                            </div>
+                            <div class="details__bid">
+                                <label for="">Budget</label>
+                                <span class="amount">${{ transport.budget }}</span>
+                            </div>
+                            <div class="details__link">
+                                <a style="width: 90%;" v-if="transport.biddable" href="javascript:void(0);" @click="openBidModal(transport.id)" class="btn btn--secondary btn--secondary--fill">BID NOW</a>
+                                <a style="width: 90%;" v-if="transport.first_bid_buy" href="javascript:void(0);" @click="openBuyModal(transport.id, transport.budget)" class="btn btn--primary btn--primary--fill">ACCEPT PRICE</a>
+                                <a href="#" class="btn-right"> <i class="fa fa-chevron-right"></i> </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div v-if="moreTransports && (transports.length - transportsPart.length) > 0" class="col-12 col-lg-12 margin-bottom-20">
+                    <a href="javascript:void(0);" @click="loadTransportsPart" class="btn btn--plain btn--plain--transparent btn--full btn-load-more">
+                        <span class="big-green-text">{{ transports.length - transportsPart.length }}</span>
+                        <span>More Transports to See</span>
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BID MODAL -->
+    <div class="modal fade bid-modal-wrapper" id="bidModal" role="dialog" aria-hidden="true" aria-labelledby="bidModalLabel">
+            <div class="modal-dialog" role="document" style="width:521px;">
+                <div class="modal-content">
+                    <form id="bidForm" method="post" v-on:submit.prevent="validateForm()">
+                        <div class="row green-margins">
+                            <div class="col-md-12">
+                                <div class="row margin-bottom">
+                                    <div class="col-md-12 white-bold">
+                                        <span class="glyphicons glyphicons-chevron-left"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-12 header-offset">
+                                                <h1 class="white-thin"> Bid on transportation </h1>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h1 class="white-thin"> Place your bid </h1>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text green">$</span>
+                                                    </div>
+                                                    <!--<input type="text" class="form-control" placeholder="165.00" aria-label="" aria-describedby="basic-addon2">-->
+                                                    <input class="form-control"
+                                                       name="amount"
+                                                       v-validate="'required|numeric|min_value:0'"
+                                                       v-model="bid.amount"
+                                                >
+    
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-pth-orange" type="submit">PLACE BID</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- BUY MODAL -->
+    <div class="buy-now modal fade bid-modal-wrapper" id="buyModal" role="dialog" aria-hidden="true" aria-labelledby="buyModalLabel">
+            <div class="modal-dialog" role="document" style="width:521px;">
+                <div class="modal-content">
+                    <form id="buyForm" method="post" v-on:submit.prevent="validateBuyForm()">
+                        <div class="row green-margins">
+                            <div class="col-md-12">
+                                <div class="row margin-bottom">
+                                    <div class="col-md-12 white-bold">
+                                        <span class="glyphicons glyphicons-chevron-left"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-12 header-offset">
+                                                <h1 class="white-thin"> Buy transport </h1>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="input-group mb-3">
+            
+                                                    <input style="display:none" class="form-control"
+                                                           name="amount"
+                                                           value="transport_budget"
+                                                           v-model="buyBid.amount = transport_budget"
+                                                    >
+                                                    <div class="col-md-12 header-offset" style="padding-left: 0;">
+                                                            <h1 class="white-thin">Price: $ {{ transport_budget }} </h1>
+                                                        </div>
+                                                   
+    
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-pth-orange" type="submit">ACCEPT PRICE</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

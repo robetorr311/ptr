@@ -1,0 +1,60 @@
+.profile-box{
+    .avatar{
+        width: 100%;
+        padding-top: 100%;
+        background-size: cover;
+        img{
+            display: none;
+        }
+    }
+    .member{
+        text-align: center;
+        font-size: 14px;
+        color: $color-gray-dark;
+        margin-top: 15px;
+        span{
+            font-size: inherit;
+            color: $color-primary;
+        }
+    }
+    .details{
+        .name{
+            font-size: 24px;
+            color: $color-gray-dark;
+        }
+        .role{
+            font-size: 18px;
+            font-weight: bold;
+            color: $color-secondary;
+            margin-bottom: 25px;
+        }
+        &__line{
+            font-size: 16px;
+            margin-bottom: 8px;
+            .fa{
+                color: $color-secondary;
+                font-size: inherit;
+            }
+            span{
+                margin-left: 15px;
+                color: $color-gray-dark;
+                font-size: inherit;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    .profile-box{
+        .details__line{
+            i,span{
+                font-size: 13px;
+            }
+        }
+        .actions{
+            a{
+                width: 107px;
+            }
+        }
+    }
+}

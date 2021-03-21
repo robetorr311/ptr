@@ -1,0 +1,44 @@
+.sign-up{
+    @include colorLink($color-secondary, $color-secondary);
+}
+.notice{
+    margin-top: 20px;
+}
+.upload{
+    padding: 10px 20px;
+    .uploadPhoto{
+        display: block;
+        @include clearfix();
+        .icon{
+            width:70px;
+            height: 70px;
+            border-radius: 50%;
+            display: block;
+            border: 1px dashed $color-gray-dark;
+            position: relative;
+            float: left;
+            .fa{
+                top: 50%;
+                left: 50%;
+                position: absolute;
+                margin-top: -11px;
+                margin-left: -11px;
+                font-size: 22px; 
+                color: $color-secondary;
+            }
+        }
+        .subtitle--secondary{
+            line-height: 70px;
+            padding-left: 20px;
+            float: left;
+            .fa{
+                color: inherit;
+                font-size: 20px;
+            }
+        }
+    }
+
+}
+.facebook{
+    margin-bottom: 20px;
+}

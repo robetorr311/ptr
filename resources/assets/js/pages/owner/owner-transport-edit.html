@@ -1,0 +1,86 @@
+<div>
+        <div class="green-bg-wrapper">
+            <div class="container">
+                <section class="col-12">
+                    <div class="row">
+                            <div class="col-12">
+                                    <div class="breadcrumb">
+                                        <a style="color:white;" href="javascript:history.go(-1)"><i class="fa fa-chevron-left"></i>Back</a>
+                                    </div>
+                                </div>
+                        <div class="col-12 col-lg-6">
+                            <h3  data-aos="fade-right" class="section-title">Edit Date of departure and Arrival Date</h3>
+                            <div  data-aos="fade-up" class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label class="white" for="departure_type">Departure</label>
+                                    <select id="departure_type" class="form-control"
+                                        name="departure_type"
+                                        v-model="form.departure_type"
+                                    >
+                                        <option value="Before">Before</option>
+                                        <option value="After">After</option>
+                                        <option value="On">On</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <label for="startDate">&nbsp;</label>
+                                    <input type="text"
+                                        class="datepicker form-control"
+                                        id="startDate"
+                                        name="departure_date"
+                                        v-model="form.departure_date"
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div data-aos="fade-right" class="form-group col-md-4">
+                                    <label class="white" for="arrival_type">Arrival</label>
+                                    <select id="arrival_type" class="form-control"
+                                        name="arrival_type"
+                                        v-model="form.arrival_type"
+                                    >
+                                        <option selected value="Before">Before</option>
+                                        <option value="After">After</option>
+                                        <option value="On">On</option>
+                                    </select>
+                                </div>
+                                <div data-aos="fade-left" class="form-group col-md-8">
+                                    <label for="endDate">&nbsp;</label>
+                                    <input type="text"
+                                           class="datepicker form-control"
+                                           id="endDate"
+                                           name="arrival_date"
+                                           v-model="form.arrival_date"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 transport-dates-wrapper">
+                            <div  data-aos="fade-right" class="transport-dates">
+                                <div class="before">
+                                    <label>Before</label>
+                                    <span class="transport-dates__day">{{ form.departure_date | day }}</span>
+                                    <span class="transport-dates__mmyy">{{ form.departure_date | month }}, {{ form.departure_date | year }}</span>
+                                </div>
+                                <div  data-aos="fade-left" class="after">
+                                    <label>On</label>
+                                    <span class="transport-dates__day">{{ form.arrival_date | day }}</span>
+                                    <span class="transport-dates__mmyy">{{ form.arrival_date | month }}, {{ form.arrival_date | year }}</span>
+                                </div>
+                                <i class="fa fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <div style="margin-top:5%;" class="post-pet-transport-button">
+                    <button @click="submitForm" class="btn btn--primary btn--primary--fill btn--full">SAVE PET TRANSPORT</button>
+                </div>
+            </div>
+            <div class="col-lg-4"></div>
+        </div>
+    </div>

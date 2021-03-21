@@ -1,0 +1,137 @@
+.login{
+    position: relative;
+    text-align: center;
+    .sign-in-avatar{
+        display: inline-block;
+        img{
+            height: 93px;
+        }
+        span{
+            display: block;
+            font-weight: bold;
+        }
+        .fa{
+            display: none;
+            color: $color-primary;
+            position: absolute;
+            left: 50%;
+            bottom: -40px;
+            z-index: 500;
+            margin-left: -5px;
+        }
+        &:hover,&.active{
+            //text-decoration: none;
+            //.fa{
+            //    display: block;
+            //}
+            //&::after{
+            //    content: "";
+            //    position: absolute;
+            //    z-index: 500;
+            //    bottom: -30px;
+            //    left: 0;
+            //    height: 5px;
+            //    width: 50%;
+            //    background-color: $color-primary;
+            //}
+        }
+    }
+}
+
+@media screen and (max-width: $max-tablet){
+    .login{
+        .sign-in-avatar{
+            .fa{
+                bottom: -40px;
+            }
+            &:hover,&.active{
+                &::after{
+                    bottom: -30px;
+                }
+            }
+        }
+    }
+}
+.sign-in-container{
+    position: relative;
+    .sign-in-wrapper{
+        z-index: 10;
+        background-color: $color-white;
+        min-width: 400px;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        .login{
+            margin: 0;
+        }
+    }
+}
+
+.signIn-area{
+    .sign-in-buttons{
+        padding-top: 22px;
+        top: 181px;
+        z-index: 100000;
+        background-color: $color-white;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        @include boxShadow();
+    }
+
+}
+.border-radius-top{
+    border-top-left-radius: 5px !important;
+    border-top-right-radius: 5px !important;
+}
+.border-radius-bottom{
+    border-bottom-left-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+}
+.owner-form{
+    input{
+        border: 1px solid #e6e6e6 !important;
+    }
+}
+.login-navigation-wrapper{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    background-color: white;
+    width: 100%;
+    padding: 15px 0 0 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    .sign-left{
+        width: 50%;
+        border-bottom: 5px solid $color-white;
+        transition: border-color ease .3s;
+        &:hover,&.active{
+            border-color: $color-primary;
+            transition: border-color ease .3s;
+        }
+    }
+    .sign-right{
+        width: 50%;
+        border-bottom: 5px solid $color-white;
+        transition: border-color ease .3s;
+        &:hover,&.active{
+            border-color: $color-primary;
+            transition: border-color ease .3s;
+        }
+    }
+}
+.sign-in-wrapper{
+    padding: 10px 0;
+    margin-top: -686px;
+}
+.sign-partial{
+    width: 100%;
+    @include boxShadow();
+}
+@media only screen and (max-width: 768px){
+    .sign-in-wrapper{
+        margin-top: 0;
+    }
+}
+

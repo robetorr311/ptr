@@ -1,0 +1,106 @@
+.header-mobile{
+  display: none;
+  margin-right: 10px;
+  a.dropdown-toggle{
+    background-color: $color-primary;
+    color: $color-white;
+  }
+  .dropdown-menu{
+    background-color: $color-primary;
+    a{
+      color: $color-white;
+    }
+    .social-media-icons{
+      text-align: center;
+      border-top: 1px solid rgba(128, 128, 128, 0.41);
+      padding-top: 10px;
+      a{
+        margin-right: 5px;
+      }
+    }
+    .d-menu-logged-in{
+      border-bottom: 1px solid rgba(128, 128, 128, 0.41);
+      a.dropdown-item{
+          i{
+            margin-right: 10px;
+          }
+      }
+    }
+    .d-menu{
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(128, 128, 128, 0.41);
+      &.d-avatar-wrapper{
+        padding: 10px;
+        justify-content: flex-start;
+        align-items: center;
+        span{
+          margin-left: 15px;
+          color: $color-white;
+        }
+        .d-avatar{
+          /* make a square container */
+          width: 40px;
+          height: 40px;
+
+          /* fill the container, preserving aspect ratio, and cropping to fit */
+          background-size: cover;
+
+          /* center the image vertically and horizontally */
+          background-position: top center;
+
+          /* round the edges to a circle with border radius 1/2 container size */
+          border-radius: 50%;
+        }
+      }
+      a{
+        display: block;
+        width: 50%;
+        text-align: center;
+        &:first-child{
+          border-right: 1px solid rgba(128, 128, 128, 0.41);
+        }
+      }
+    }
+  }
+}
+
+
+
+.d-avatar{
+  /* make a square container */
+  width: 40px;
+  height: 40px;
+
+  /* fill the container, preserving aspect ratio, and cropping to fit */
+  background-size: cover;
+
+  /* center the image vertically and horizontally */
+  background-position: top center;
+
+  /* round the edges to a circle with border radius 1/2 container size */
+  border-radius: 50%;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .hide-for-mobile{
+    display: none;
+  }
+
+  .header-mobile {
+    display: block;
+    .dropdown-toggle{
+      &:after{
+        display: none;
+      }
+    }
+    .dropdown-menu.dropdown-menu-right{
+      width: 345px;
+      left: -187px;
+    }
+  }
+}
+
+

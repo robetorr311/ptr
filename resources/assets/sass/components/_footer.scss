@@ -1,0 +1,96 @@
+.footer{
+    padding-top: 20px;
+    margin-top: 20px;
+    margin-bottom: 0;
+    background-size: cover;
+    background-position: center;
+    height: 338px;
+}
+.link-list{
+    font-family: 'Open Sans', sans-serif;
+    li a {
+        color: $color-white;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}
+.footer-menu-title{
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.privacy{
+    &__link{
+        @include colorLink($color-gray-dark, $color-gray-dark);
+        margin-left: 15px;
+    }
+    a{
+        &:hover{
+            color: $color-white;
+        }
+    }
+}
+
+.newsletter{
+    font-size: 36px;
+    border: none;
+    color: $color-white;
+    outline: none;
+    background-color: transparent;
+
+}
+.newsletter-signup{
+    display: flex;
+    align-items: stretch;
+    .newsletter-input{
+        font-family: 'Open Sans', sans-serif;
+        flex-grow: 5;
+    }
+    .newsletter-button{
+        a{
+            border: 1px solid $color-white;
+        }
+        flex-grow: 1;
+    }
+}
+input.newsletter{
+    @include placeholderColor($color-white);
+}
+.social-media{
+    font-family: 'Open Sans', sans-serif;
+    &__title{
+        color: $color-gray-dark;
+    }
+    &__icons{
+        margin-top: 10px;
+        a{
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .fa{
+            color: $color-gray-dark;
+        }
+    }
+}
+
+@media (max-width: $max-phone){
+    .social-media{
+        text-align: center;
+    }
+}
+@media only screen and (max-width: 1024px) {
+    .newsletter{
+        font-size: 16px;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .footer {
+        height: 590px !important;
+    }
+}
+.privacy-area{
+    margin-top: 64px;
+    font-family: 'Open Sans', sans-serif;
+}

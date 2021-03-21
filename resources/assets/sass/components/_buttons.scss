@@ -1,0 +1,92 @@
+a.btn, button.btn{
+    padding-top: 10px;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: normal;
+    border-radius: 5px;
+    transition: background-color .7s ease;
+    &--detached{
+        margin: 5px;
+    }
+    &--full{
+        width: 100%;
+    }
+    &--no-border{
+        border-radius: 0;
+    }
+    &--primary{
+        //border: 2px solid $color-primary;
+        &--transparent{
+            @include colorLink($color-primary, $color-primary);
+        }
+        &--fill{
+            @include colorLink($color-white, $color-white);
+            background: $color-primary;
+            &:hover{
+                background-color: $orange-primary-lighten;
+                transition: background-color .7s ease;
+            }
+        }
+        &:hover{
+            background-color: $orange-primary-lighten;
+            transition: all .7s ease;
+            @include boxShadow();
+        }
+    }
+    &--secondary{
+        //border: 2px solid $color-secondary;
+        &--transparent{
+            @include colorLink($color-secondary, $color-secondary);
+        }
+        &--fill{
+            @include colorLink($color-white, $color-white);
+            background: $color-secondary;
+        }
+        &:hover{
+            background-color: $green-primary-lighten;
+            transition: background-color .7s ease;
+            @include boxShadow();
+        }
+
+    }
+    &--plain{
+        border: 2px solid $color-gray-dark;
+        transition: all .7s ease;
+        &--transparent{
+            @include colorLink($color-gray-dark, $color-gray-dark);
+        }
+        &--fill{
+            @include colorLink($color-white, $color-white);
+            background: $color-gray-light;
+        }
+        .fa{
+            color: $color-secondary;
+        }
+        &:hover{
+            background-color: $color-white;
+            border: 2px solid $color-gray-light;
+            transition: all .7s ease;
+            @include boxShadowWithColor($color-gray-dark);
+        }
+    }
+    &-send{
+        float: right;
+        width: 50%;
+        height: 100%;
+        padding: 24px 10px;
+    }
+    .fa{
+        font-weight: normal;
+        font-size: 20px;
+        line-height: 20px;
+    }
+    &--cookie{
+      border: 2px solid $color-gray-dark;
+      @include colorLink($color-gray-dark, $color-gray-dark);
+    }
+} 
+.buy-bid{
+    border: 2px solid $color-white;
+    @include colorLink($color-white, $color-white);
+}
+

@@ -1,0 +1,71 @@
+Server: ubuntu-1cpu-1gb-us-chi1 (003ba8b0-d8d0-45a9-b69f-f241162ad6f3)
+IP address: 157.245.249.76
+Username: root
+Password: Algxf7-bth
+mysql uername:pettravel
+mysql password: 1goyu-9962
+
+arvixe.com
+nenadjovanovic23@gmail.com
+163662-808460
+pass: madr23id
+
+dean.ns.cloudflare.com
+dolly.ns.cloudflare.com
+
+http://www.pettravelhub.com/
+
+stripe
+login
+nash.jovanovic@gmail.com
+password
+Dunja23$
+
+clientid ca_Gw16u08rRumySFl0PIFSKOSHdjxkg6so
+test clientid ca_Gw16JwAHdqceZB15KyFzqmCF0U5XH0Em
+Publishable key
+pk_live_Na776R7Bk6mDkdIWFgiKQlUv
+pk_test_xgXR6eN5i849hI3QSIQujL17
+Secretkey
+sk_live_EyE5RE3AxPEyASjCPEjCIKeY
+sk_test_GQfC8ZVFv7A6bADv8sojSCeQ
+
+http://127.0.0.1:8000/stripe/connect/verify?scope=read_write&code=ac_H8gTyq4do12n3YqWOpU5j1FEHgIFN5ec
+
+
+5200828282828210    tok_mastercard_debit_transferSuccess
+
+Admin account e-mail and login are:
+username - nash.jovanovic@gmail.com
+password - Dunja_23$
+
+
+        RewriteEngine on
+        RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+        RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+http://www.pettravelhub.com/
+
+        ServerAdmin webmaster@pettravelhub.com
+        DocumentRoot /var/www/html/pettravelhub/public
+        ServerName pettravelhub.com
+        ServerAlias www.pettravelhub.com
+
+
+        <Directory /var/www/html/pettravelhub/public>
+            Options Indexes FollowSymLinks MultiViews
+            AllowOverride All
+            Order allow,deny
+            allow from all
+        </Directory>
+        <IfModule mod_dir.c>
+            DirectoryIndex index.php index.pl index.cgi index.html index.xhtml
+        </IfModule>
+https://www.ssllabs.com/ssltest/analyze.html?d=pettravelhub.com&latest
+
+       //$url="https://connect.stripe.com/express/oauth/authorize?redirect_uri=http://127.0.0.1:8000/stripe/connect/verify&client_id=ca_Gw16JwAHdqceZB15KyFzqmCF0U5XH0Em&state={STATE_VALUE}";
+
+
+whsec_VZxXM7dEn7RR53Gf8sWxAgss6t3W8Zqi
+
+       VNSBKT

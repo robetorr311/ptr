@@ -1,0 +1,124 @@
+.dropdown-menu.notifications{
+  background-color: #f8f9fa;
+  width: 500px;
+  max-width: 500px;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: ease border-left .3s;
+  .dropdown-item {
+    transition: ease opacity .3s;
+    &:hover{
+      opacity: .8;
+      transition: ease opacity .3s;
+    }
+  }
+}
+.dropdown-menu.notifications>.dropdown-item{
+  border-bottom: solid 1px gray;
+}
+.dropdown-menu.notifications>.dropdown-item.new{
+  background-color: rgba(255, 165, 0, .3);
+}
+.dropdown-menu.notifications>.dropdown-item.new:hover{
+  border-right: none;
+}
+.dropdown-menu.notifications>.dropdown-item:last-child:hover{
+  border-right: none;
+  color: gray;
+}
+.dropdown-menu.notifications>.dropdown-item:last-child{
+  border-bottom: none;
+}
+.dropdown-menu.notifications>.dropdown-item:hover{
+  border-left: solid 5px $orange-primary;
+  transition: ease border-left .3s;
+}
+.avatar{
+  height:60px;
+  width: 60px;
+  border-radius: 50%;
+  background-color: gray;
+}
+.description{
+  color:gray;
+}
+.success{
+  font-weight: bold;
+  color:#047f03;
+}
+.date{
+  font-weight: bold;
+  color: gray;
+}
+.see-more{
+  text-align: center;
+  color: gray;
+}
+.dropdown-item:active{
+  background-color: initial;
+}
+.avatar>img{
+  height: 55px;
+  width: 55px;
+  position: relative;
+  top: 2px;
+  left: 2px;
+}
+.description>p{
+  word-break: break-word;
+  white-space: normal;
+}
+.notifications{
+  left: -230px;
+  top: 10px;
+}
+.notifications-preview{
+  max-height: 293px;
+  overflow-y: scroll;
+}
+.notification-button{
+  position: relative;
+  img {
+    height: 30px;
+    width: auto;
+    background-color: $color-white;
+    transition: ease transform .3s;
+    &:hover {
+      transform: scale(1.1);
+      transition: ease transform .3s;
+    }
+  }
+  i {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 9px;
+    color: $green-primary;
+  }
+}
+.notification-avatar {
+  /* make a square container */
+  width: 50px;
+  height: 50px;
+
+  /* fill the container, preserving aspect ratio, and cropping to fit */
+  background-size: cover;
+
+  /* center the image vertically and horizontally */
+  background-position: top center;
+
+  /* round the edges to a circle with border radius 1/2 container size */
+  border-radius: 50%;
+  transition: ease transform .3s;
+  &:hover {
+    transform: scale(1.2);
+    transition: ease transform .3s;
+  }
+
+  margin-top: 20px;
+}
+@media only screen and (max-width: 425px) {
+  .dropdown-menu.notifications{
+    width: 370px;
+  }
+}

@@ -1,0 +1,130 @@
+.gray{
+  color:gray;
+}
+.form-control:focus{
+  border-color: transparent;
+  box-shadow: none;
+}
+.lg-item-head{
+  padding-top:30px;
+  padding-bottom:20px;
+  font-weight: normal;
+  color: gray;
+  margin-right: 10%;
+  font-size:2rem;
+}
+.row-border-bottom{
+  border-bottom: solid 1px grey;
+  left: 0;
+  right: 0;
+}
+.lg-item{
+  border: none;
+}
+.list-group{
+  border-bottom: none;
+}
+.bidding-list-avatar{
+  width: 100px;
+  height: 100px;
+}
+.outline{
+  color: gray;
+}
+.outline:hover{
+  color: #047f03;
+}
+.checked{
+  color: #047f03;
+}
+.price{
+  font-weight: normal;
+  color: #047f03;
+}
+.pth-button{
+  color: white;
+  background-color: #047f03;
+  border: solid #047f03;
+  cursor: pointer;
+}
+.name{
+  font-size: 1.4rem;
+  font-weight: normal;
+  color: gray;
+}
+select.custom{
+  border:none;
+  margin-left: 5%;
+}
+.form-group.form-inline{
+  overflow: hidden;
+}
+.form-group.form-inline select{
+  display: block;
+  padding: 2px 25px 2px 2px;
+  border: none;
+  background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") right center no-repeat;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.centered-content{
+  text-align: center;
+}
+.form-group.form-inline select:focus{
+  border:solid 1px gray;
+  border-radius:0;
+}
+.number-left{
+  font-size: 2rem;
+  color: #047f03;
+}
+a:hover{
+  text-decoration: none;
+  color: initial;
+}
+a.custom-link{
+  color: gray;
+}
+.avatar-placeholder{
+
+  /* make a square container */
+  width: 100px;
+  height: 100px;
+
+  /* fill the container, preserving aspect ratio, and cropping to fit */
+  background-size: cover;
+
+  /* center the image vertically and horizontally */
+  background-position: top center;
+
+  /* round the edges to a circle with border radius 1/2 container size */
+  border-radius: 50%;
+  transition: ease transform .3s;
+  &:hover {
+    transform: scale(1.2);
+    transition: ease transform .3s;
+  }
+}
+.col-md-2{
+  vertical-align: middle;
+}
+.row.bidding-item{
+  padding-bottom: 10px;
+  border-bottom: solid 1px gray;
+}
+.bid-row {
+  height: 115px;
+  .bid-user-info {
+    padding: 20px;
+  }
+  .bid-stars {
+    padding-top: 40px;
+  }
+  .bid-price {
+    padding-top: 38px;
+  }
+  .bid-button {
+    padding-top: 30px;
+  }
+}

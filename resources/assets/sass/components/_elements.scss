@@ -1,0 +1,85 @@
+// Add styles here...
+*{
+	box-sizing: border-box;
+}
+.link-list{
+	list-style-type: none;
+	padding-left: 0;
+	li{
+		display: block;
+	}
+}
+.bar{
+	height: 6px;
+}
+.green{
+	color: $color-secondary;
+}
+.orange{
+	color: $color-primary; 
+}
+
+hr{
+	border-top: 1px solid $color-gray-light;
+	width: 100%;
+	margin: 20px 0;
+	&.separate{
+		margin:0;
+		&.top{
+			margin-top: 75px;
+		}
+		&.bottom{
+			margin-bottom: 75px;
+		}
+	}
+}
+.subtitle--secondary{
+	color: $color-secondary;
+	font-weight: bold;
+	
+	a{
+		@include colorLink($color-secondary, $color-secondary);
+	}
+}
+.section-title{
+	margin-top: 75px;
+	margin-bottom: 35px;
+	color: $color-primary; 
+}
+.avatar{
+	border: 1px solid $color-gray-dark;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	overflow: hidden;
+	position: relative;
+	img{	
+		width: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		border-radius: 50%;
+		border: 2px solid white;
+	}
+}
+.box{
+	-webkit-box-shadow: 0px 0px 14px -1px #bebebe;
+	-moz-box-shadow: 0px 0px 14px -1px #bebebe;
+	box-shadow: 0px 0px 14px -1px #bebebe;
+}
+
+@media screen and (max-width: $max-tablet){
+	.section-title{
+		margin-top: 30px;
+	}
+	hr{
+		&.separate{
+			&.top{
+				margin-top: 25px;
+			}
+			&.bottom{
+				margin-bottom: 25px;
+			}
+		}
+		}
+}

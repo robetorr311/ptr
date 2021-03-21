@@ -1,0 +1,126 @@
+
+.review-box{
+    background: $color-secondary;
+    color: white;
+    padding: 55px 30px 40px 30px;
+    border-radius: 5px;
+    @include clearfix();
+    position: relative;
+    overflow: hidden;
+    h3, label{
+        color: inherit;
+    }
+    hr{
+        margin: 50px 0;
+        opacity: 0.5;
+    }
+    .rating-line{
+        @include clearfix();
+        margin: 20px 0;
+        .stars{
+            float: right;
+            margin-right: 30px;
+        }
+    }
+    .rating-column{
+        width: 33.3333%;
+        float: left;
+        color: inherit;
+        position: relative;
+        z-index: 5;
+        &.overall{
+            width: 100%;
+            text-align: center;
+            margin-bottom: 30px;
+            label{
+                color: inherit;
+                &:first-of-type{
+                    font-size: 60px;
+                }
+            }
+            .stars{
+                display: inline-block;
+            }
+        }
+        label{
+            display: block;
+            color: inherit;
+            font-size: 30px;
+            font-weight: 500;
+            font-family: 'Baloo Bhaina', Times, serif;
+            text-align: center;
+            &:first-of-type{
+                font-size: 16px;
+            }
+        }
+    }
+    #additionalComments{
+        background: #047203;
+        color: white;
+        ::placeholder{
+            color: white;
+        }
+    }
+    .info{
+        color: white;
+        font-size: 12px;
+        opacity: 0.5;
+    }
+    &.bg{
+        &:before{
+            position: absolute;
+            font-family: 'FontAwesome';
+            bottom: -226px;
+            right: -138px;
+            content: "\f006";
+            font-size: 400px;
+            opacity: 0.7;
+            color: darkgreen;
+            z-index: 1;
+        }
+    }
+}
+.review-box-owner{
+    border: 1px solid $color-gray-light;
+    border-radius: 5px;
+    margin-bottom: 25px;
+    @include clearfix();
+    .mark{
+        background: none;
+        padding: 20px 0 0 65px;
+        color: $color-secondary;
+        font-size: 32px;
+        position: relative;
+        width: 30%;
+        float: left;
+        &:after{
+            position: absolute;
+            font-family: 'FontAwesome';
+            left: 10px;
+            top: 10px; 
+            content: "\f006";
+            font-size: 50px;
+            opacity:1;
+            color: $color-gray-light;
+            z-index: 1;
+        }
+    }
+    .details{
+        width: 70%;
+        float: left;
+        label{
+            font-size: 16px;
+            &.name{
+                font-size: inherit;
+                color: $color-secondary;
+            }
+        }
+    }
+}
+
+.reviewing-details{
+    margin-left: 80px;
+}
+.reviewee{
+    margin-bottom: 20px;
+}
